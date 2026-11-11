@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 1
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 1
 
 
    1              		.file	"stepper.c"
@@ -20,7 +20,7 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 1
    3:stepper.c     **** #define CW 1
    4:stepper.c     **** #define CCW 0
    5:stepper.c     **** 
-   6:stepper.c     **** static int NROFSTEPS = 0;
+   6:stepper.c     **** static int CurrentStep = 0;
    7:stepper.c     **** 
    8:stepper.c     **** void initStep(void){
   16              		.loc 1 8 20
@@ -38,553 +38,525 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 1
    8:stepper.c     ****     
   25              		.loc 1 8 20
   26 0006 06C6     		sw	ra,12(sp)
-  27 0008 22C4     		sw	s0,8(sp)
-  28              		.cfi_offset 1, -4
-  29              		.cfi_offset 8, -8
-  30              		.loc 1 10 5
-  31 000a 97000000 		call	rcu_periph_clock_enable
-  31      E7800000 
-  32              	.LVL0:
+  27              		.cfi_offset 1, -4
+  28              		.loc 1 10 5
+  29 0008 97000000 		call	rcu_periph_clock_enable
+  29      E7800000 
+  30              	.LVL0:
   11:stepper.c     ****     gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,
-  33              		.loc 1 11 5 is_stmt 1
-  34 0012 37140140 		li	s0,1073811456
-  35 0016 13050480 		addi	a0,s0,-2048
-  36 001a C145     		li	a1,16
-  37 001c BD46     		li	a3,15
-  38 001e 0D46     		li	a2,3
-  39 0020 97000000 		call	gpio_init
-  39      E7800000 
-  40              	.LVL1:
+  31              		.loc 1 11 5 is_stmt 1
   12:stepper.c     ****               GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);
   13:stepper.c     **** 
   14:stepper.c     ****     //sätter alla pinnar till LOW vid init 
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 2
-
-
-  15:stepper.c     ****     gpio_bit_reset(GPIOA, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);        
-  41              		.loc 1 15 5
-  42 0028 13050480 		addi	a0,s0,-2048
+  15:stepper.c     ****     //gpio_bit_reset(GPIOA, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);        
   16:stepper.c     **** 
   17:stepper.c     **** }
-  43              		.loc 1 17 1 is_stmt 0
-  44 002c 2244     		lw	s0,8(sp)
-  45              		.cfi_restore 8
-  46 002e B240     		lw	ra,12(sp)
-  47              		.cfi_restore 1
-  15:stepper.c     **** 
-  48              		.loc 1 15 5
-  49 0030 BD45     		li	a1,15
-  50              		.loc 1 17 1
-  51 0032 4101     		addi	sp,sp,16
-  52              	.LCFI1:
-  53              		.cfi_def_cfa_offset 0
-  15:stepper.c     **** 
-  54              		.loc 1 15 5
-  55 0034 17030000 		tail	gpio_bit_reset
-  55      67000300 
-  56              	.LVL2:
-  57              		.cfi_endproc
-  58              	.LFE2:
-  60              		.section	.text.execStep,"ax",@progbits
-  61              		.align	1
-  62              		.globl	execStep
-  64              	execStep:
-  65              	.LFB3:
+  32              		.loc 1 17 1 is_stmt 0
+  33 0010 B240     		lw	ra,12(sp)
+  34              		.cfi_restore 1
+  11:stepper.c     ****     gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,
+  35              		.loc 1 11 5
+  36 0012 37150140 		li	a0,1073811456
+  37              		.loc 1 17 1
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 2
+
+
+  11:stepper.c     ****     gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,
+  38              		.loc 1 11 5
+  39 0016 BD46     		li	a3,15
+  40 0018 0D46     		li	a2,3
+  41 001a C145     		li	a1,16
+  42 001c 13050580 		addi	a0,a0,-2048
+  43              		.loc 1 17 1
+  44 0020 4101     		addi	sp,sp,16
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_offset 0
+  11:stepper.c     ****     gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,
+  47              		.loc 1 11 5
+  48 0022 17030000 		tail	gpio_init
+  48      67000300 
+  49              	.LVL1:
+  50              		.cfi_endproc
+  51              	.LFE2:
+  53              		.section	.text.setStep,"ax",@progbits
+  54              		.align	1
+  55              		.globl	setStep
+  57              	setStep:
+  58              	.LFB4:
   18:stepper.c     **** 
   19:stepper.c     **** void execStep(int cw){
-  66              		.loc 1 19 22 is_stmt 1
-  67              		.cfi_startproc
+  20:stepper.c     **** 
+  21:stepper.c     ****     gpio_bit_reset(GPIOA, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3); 
+  22:stepper.c     ****     setStep(CurrentStep);
+  23:stepper.c     **** 
+  24:stepper.c     ****     if (cw==1){
+  25:stepper.c     ****         CurrentStep++;
+  26:stepper.c     ****     }
+  27:stepper.c     ****     else{
+  28:stepper.c     ****         CurrentStep--;
+  29:stepper.c     ****     }
+  30:stepper.c     **** 
+  31:stepper.c     ****     if (CurrentStep<0){
+  32:stepper.c     ****         CurrentStep=7;
+  33:stepper.c     ****     }
+  34:stepper.c     ****     else if(CurrentStep>7){
+  35:stepper.c     ****         CurrentStep=0;
+  36:stepper.c     ****     }
+  37:stepper.c     **** }    
+  38:stepper.c     **** 
+  39:stepper.c     **** void setStep(int n){
+  59              		.loc 1 39 20 is_stmt 1
+  60              		.cfi_startproc
+  61              	.LVL2:
+  40:stepper.c     ****     switch(n){
+  62              		.loc 1 40 5
+  63 0000 9D47     		li	a5,7
+  64 0002 63E1A704 		bgtu	a0,a5,.L3
+  65 0006 B7070000 		lui	a5,%hi(.L6)
+  66 000a 93870700 		addi	a5,a5,%lo(.L6)
+  67 000e 0A05     		slli	a0,a0,2
   68              	.LVL3:
-  69 0000 7971     		addi	sp,sp,-48
-  70              	.LCFI2:
-  71              		.cfi_def_cfa_offset 48
-  72 0002 22D4     		sw	s0,40(sp)
-  73 0004 26D2     		sw	s1,36(sp)
-  74              		.cfi_offset 8, -8
-  75              		.cfi_offset 9, -12
-  20:stepper.c     ****  
-  21:stepper.c     ****     while (1)
-  22:stepper.c     ****     {
-  23:stepper.c     ****     gpio_bit_set(GPIOA, GPIO_PIN_0);
-  76              		.loc 1 23 5 is_stmt 0
-  77 0006 37140140 		li	s0,1073811456
-  78              	.LBB2:
-  24:stepper.c     ****     for (volatile int i = 0; i < 100000; i++){}
-  79              		.loc 1 24 5
-  80 000a E164     		li	s1,98304
-  81              	.LBE2:
-  19:stepper.c     ****  
-  82              		.loc 1 19 22
-  83 000c 06D6     		sw	ra,44(sp)
-  84              		.cfi_offset 1, -4
-  23:stepper.c     ****     for (volatile int i = 0; i < 100000; i++){}
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 3
+  69 0010 3E95     		add	a0,a0,a5
+  70 0012 1C41     		lw	a5,0(a0)
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 3
 
 
-  85              		.loc 1 23 5
-  86 000e 13040480 		addi	s0,s0,-2048
-  87              	.LBB3:
-  88              		.loc 1 24 5
-  89 0012 9384F469 		addi	s1,s1,1695
-  90              	.LVL4:
-  91              	.L16:
-  92              	.LBE3:
-  21:stepper.c     ****     {
-  93              		.loc 1 21 5 is_stmt 1
-  23:stepper.c     ****     for (volatile int i = 0; i < 100000; i++){}
-  94              		.loc 1 23 5
-  95 0016 8545     		li	a1,1
-  96 0018 2285     		mv	a0,s0
-  97 001a 97000000 		call	gpio_bit_set
-  97      E7800000 
-  98              	.LVL5:
-  99              		.loc 1 24 5
- 100              	.LBB4:
- 101              		.loc 1 24 10
- 102              		.loc 1 24 23 is_stmt 0
- 103 0022 02C4     		sw	zero,8(sp)
- 104              	.L4:
- 105              		.loc 1 24 32 discriminator 1
- 106 0024 A247     		lw	a5,8(sp)
- 107              		.loc 1 24 5 discriminator 1
- 108 0026 63DAF408 		ble	a5,s1,.L5
- 109              	.LBE4:
-  25:stepper.c     ****     gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_1);
- 110              		.loc 1 25 5 is_stmt 1
- 111 002a 8D45     		li	a1,3
- 112 002c 2285     		mv	a0,s0
- 113 002e 97000000 		call	gpio_bit_set
- 113      E7800000 
- 114              	.LVL6:
-  26:stepper.c     ****     for (volatile int i = 0; i < 100000; i++){}
- 115              		.loc 1 26 5
- 116              	.LBB5:
- 117              		.loc 1 26 10
- 118              		.loc 1 26 23 is_stmt 0
- 119 0036 02C6     		sw	zero,12(sp)
- 120              	.L6:
- 121              		.loc 1 26 32 discriminator 1
- 122 0038 B247     		lw	a5,12(sp)
- 123              		.loc 1 26 5 discriminator 1
- 124 003a 63D4F408 		ble	a5,s1,.L7
- 125              	.LBE5:
-  27:stepper.c     **** 
-  28:stepper.c     ****     gpio_bit_reset(GPIOA, GPIO_PIN_0);
- 126              		.loc 1 28 5 is_stmt 1
- 127 003e 8545     		li	a1,1
- 128 0040 2285     		mv	a0,s0
- 129 0042 97000000 		call	gpio_bit_reset
- 129      E7800000 
- 130              	.LVL7:
-  29:stepper.c     **** 
-  30:stepper.c     ****     gpio_bit_set(GPIOA, GPIO_PIN_1 | GPIO_PIN_2);
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 4
+  71 0014 8287     		jr	a5
+  72              		.section	.rodata.setStep,"a",@progbits
+  73              		.align	2
+  74              		.align	2
+  75              	.L6:
+  76 0000 00000000 		.word	.L13
+  77 0004 00000000 		.word	.L12
+  78 0008 00000000 		.word	.L11
+  79 000c 00000000 		.word	.L10
+  80 0010 00000000 		.word	.L9
+  81 0014 00000000 		.word	.L8
+  82 0018 00000000 		.word	.L7
+  83 001c 00000000 		.word	.L5
+  84              		.section	.text.setStep
+  85              	.L13:
+  41:stepper.c     **** 
+  42:stepper.c     ****         case 0:
+  43:stepper.c     ****             gpio_bit_set(GPIOA, GPIO_PIN_0);
+  86              		.loc 1 43 13
+  87 0016 8545     		li	a1,1
+  88              	.L14:
+  44:stepper.c     ****             break;
+  45:stepper.c     **** 
+  46:stepper.c     ****         case 1:
+  47:stepper.c     ****             gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_1);
+  48:stepper.c     ****             break;
+  49:stepper.c     **** 
+  50:stepper.c     ****         case 2:
+  51:stepper.c     ****             gpio_bit_set(GPIOA, GPIO_PIN_1);
+  52:stepper.c     ****             break;
+  53:stepper.c     **** 
+  54:stepper.c     ****         case 3:
+  55:stepper.c     ****             gpio_bit_set(GPIOA, GPIO_PIN_1 | GPIO_PIN_2);
+  56:stepper.c     ****             break;
+  57:stepper.c     **** 
+  58:stepper.c     ****         case 4:
+  59:stepper.c     ****             gpio_bit_set(GPIOA, GPIO_PIN_2);
+  60:stepper.c     ****             break;
+  61:stepper.c     **** 
+  62:stepper.c     ****         case 5:
+  63:stepper.c     ****             gpio_bit_set(GPIOA, GPIO_PIN_2 | GPIO_PIN_3);
+  64:stepper.c     ****             break;                
+  65:stepper.c     **** 
+  66:stepper.c     ****         case 6:
+  67:stepper.c     ****             gpio_bit_set(GPIOA, GPIO_PIN_3);
+  68:stepper.c     ****             break;    
+  69:stepper.c     **** 
+  70:stepper.c     ****         case 7:
+  71:stepper.c     ****             gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_3);    
+  89              		.loc 1 71 13 is_stmt 0
+  90 0018 37150140 		li	a0,1073811456
+  91 001c 13050580 		addi	a0,a0,-2048
+  92 0020 17030000 		tail	gpio_bit_set
+  92      67000300 
+  93              	.LVL4:
+  94              	.L12:
+  47:stepper.c     ****             break;
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 4
 
 
- 131              		.loc 1 30 5
- 132 004a 9945     		li	a1,6
- 133 004c 2285     		mv	a0,s0
- 134 004e 97000000 		call	gpio_bit_set
- 134      E7800000 
- 135              	.LVL8:
-  31:stepper.c     ****     for (volatile int i = 0; i < 100000; i++){}
- 136              		.loc 1 31 5
- 137              	.LBB6:
- 138              		.loc 1 31 10
- 139              		.loc 1 31 23 is_stmt 0
- 140 0056 02C8     		sw	zero,16(sp)
- 141              	.L8:
- 142              		.loc 1 31 32 discriminator 1
- 143 0058 C247     		lw	a5,16(sp)
- 144              		.loc 1 31 5 discriminator 1
- 145 005a 63D8F406 		ble	a5,s1,.L9
- 146              	.LBE6:
-  32:stepper.c     **** 
-  33:stepper.c     ****     gpio_bit_reset(GPIOA, GPIO_PIN_1);
- 147              		.loc 1 33 5 is_stmt 1
- 148 005e 8945     		li	a1,2
- 149 0060 2285     		mv	a0,s0
- 150 0062 97000000 		call	gpio_bit_reset
- 150      E7800000 
- 151              	.LVL9:
-  34:stepper.c     **** 
-  35:stepper.c     ****     gpio_bit_set(GPIOA, GPIO_PIN_2 | GPIO_PIN_3);
- 152              		.loc 1 35 5
- 153 006a B145     		li	a1,12
- 154 006c 2285     		mv	a0,s0
- 155 006e 97000000 		call	gpio_bit_set
- 155      E7800000 
- 156              	.LVL10:
-  36:stepper.c     ****     for (volatile int i = 0; i < 100000; i++){}
- 157              		.loc 1 36 5
- 158              	.LBB7:
- 159              		.loc 1 36 10
- 160              		.loc 1 36 23 is_stmt 0
- 161 0076 02CA     		sw	zero,20(sp)
- 162              	.L10:
- 163              		.loc 1 36 32 discriminator 1
- 164 0078 D247     		lw	a5,20(sp)
- 165              		.loc 1 36 5 discriminator 1
- 166 007a 63DCF404 		ble	a5,s1,.L11
- 167              	.LBE7:
+  95              		.loc 1 47 13 is_stmt 1
+  96 0028 8D45     		li	a1,3
+  97 002a FDB7     		j	.L14
+  98              	.L11:
+  51:stepper.c     ****             break;
+  99              		.loc 1 51 13
+ 100 002c 8945     		li	a1,2
+ 101 002e EDB7     		j	.L14
+ 102              	.L10:
+  55:stepper.c     ****             break;
+ 103              		.loc 1 55 13
+ 104 0030 9945     		li	a1,6
+ 105 0032 DDB7     		j	.L14
+ 106              	.L9:
+  59:stepper.c     ****             break;
+ 107              		.loc 1 59 13
+ 108 0034 9145     		li	a1,4
+ 109 0036 CDB7     		j	.L14
+ 110              	.L8:
+  63:stepper.c     ****             break;                
+ 111              		.loc 1 63 13
+ 112 0038 B145     		li	a1,12
+ 113 003a F9BF     		j	.L14
+ 114              	.L7:
+  67:stepper.c     ****             break;    
+ 115              		.loc 1 67 13
+ 116 003c A145     		li	a1,8
+ 117 003e E9BF     		j	.L14
+ 118              	.L5:
+ 119              		.loc 1 71 13
+ 120 0040 A545     		li	a1,9
+ 121 0042 D9BF     		j	.L14
+ 122              	.LVL5:
+ 123              	.L3:
+  72:stepper.c     **** 
+  73:stepper.c     ****     }
+  74:stepper.c     ****         
+  75:stepper.c     **** } 
+ 124              		.loc 1 75 1 is_stmt 0
+ 125 0044 8280     		ret
+ 126              		.cfi_endproc
+ 127              	.LFE4:
+ 129              		.section	.text.execStep,"ax",@progbits
+ 130              		.align	1
+ 131              		.globl	execStep
+ 133              	execStep:
+ 134              	.LFB3:
+  19:stepper.c     **** 
+ 135              		.loc 1 19 22 is_stmt 1
+ 136              		.cfi_startproc
+ 137              	.LVL6:
+  21:stepper.c     ****     setStep(CurrentStep);
+ 138              		.loc 1 21 5
+  19:stepper.c     **** 
+ 139              		.loc 1 19 22 is_stmt 0
+ 140 0000 4111     		addi	sp,sp,-16
+ 141              	.LCFI2:
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 5
+
+
+ 142              		.cfi_def_cfa_offset 16
+ 143 0002 26C2     		sw	s1,4(sp)
+ 144              		.cfi_offset 9, -12
+ 145 0004 AA84     		mv	s1,a0
+  21:stepper.c     ****     setStep(CurrentStep);
+ 146              		.loc 1 21 5
+ 147 0006 37150140 		li	a0,1073811456
+ 148              	.LVL7:
+ 149 000a BD45     		li	a1,15
+ 150 000c 13050580 		addi	a0,a0,-2048
+  19:stepper.c     **** 
+ 151              		.loc 1 19 22
+ 152 0010 06C6     		sw	ra,12(sp)
+ 153 0012 22C4     		sw	s0,8(sp)
+ 154              		.cfi_offset 1, -4
+ 155              		.cfi_offset 8, -8
+  21:stepper.c     ****     setStep(CurrentStep);
+ 156              		.loc 1 21 5
+ 157 0014 97000000 		call	gpio_bit_reset
+ 157      E7800000 
+ 158              	.LVL8:
+  22:stepper.c     **** 
+ 159              		.loc 1 22 5 is_stmt 1
+ 160 001c 37040000 		lui	s0,%hi(.LANCHOR0)
+ 161 0020 03250400 		lw	a0,%lo(.LANCHOR0)(s0)
+ 162 0024 97000000 		call	setStep
+ 162      E7800000 
+ 163              	.LVL9:
+  24:stepper.c     ****         CurrentStep++;
+ 164              		.loc 1 24 5
+  24:stepper.c     ****         CurrentStep++;
+ 165              		.loc 1 24 8 is_stmt 0
+ 166 002c 0547     		li	a4,1
+ 167 002e 93070400 		addi	a5,s0,%lo(.LANCHOR0)
+ 168 0032 639DE400 		bne	s1,a4,.L16
+  25:stepper.c     ****     }
+ 169              		.loc 1 25 9 is_stmt 1
+  25:stepper.c     ****     }
+ 170              		.loc 1 25 20 is_stmt 0
+ 171 0036 9843     		lw	a4,0(a5)
+ 172 0038 0507     		addi	a4,a4,1
+ 173              	.L17:
+  31:stepper.c     ****         CurrentStep=7;
+ 174              		.loc 1 31 5 is_stmt 1
+  31:stepper.c     ****         CurrentStep=7;
+ 175              		.loc 1 31 8 is_stmt 0
+ 176 003a 635C0700 		bge	a4,zero,.L18
+  32:stepper.c     ****     }
+ 177              		.loc 1 32 9 is_stmt 1
+  32:stepper.c     ****     }
+ 178              		.loc 1 32 20 is_stmt 0
+ 179 003e 1D47     		li	a4,7
+ 180              	.L22:
+ 181 0040 98C3     		sw	a4,0(a5)
+ 182              	.L15:
   37:stepper.c     **** 
-  38:stepper.c     ****     gpio_bit_reset(GPIOA, GPIO_PIN_2);
- 168              		.loc 1 38 5 is_stmt 1
- 169 007e 9145     		li	a1,4
- 170 0080 2285     		mv	a0,s0
- 171 0082 97000000 		call	gpio_bit_reset
- 171      E7800000 
- 172              	.LVL11:
-  39:stepper.c     **** 
-  40:stepper.c     ****     gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_3);
- 173              		.loc 1 40 5
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 5
+ 183              		.loc 1 37 1
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 6
 
 
- 174 008a A545     		li	a1,9
- 175 008c 2285     		mv	a0,s0
- 176 008e 97000000 		call	gpio_bit_set
- 176      E7800000 
- 177              	.LVL12:
-  41:stepper.c     ****     for (volatile int i = 0; i < 100000; i++){}
- 178              		.loc 1 41 5
- 179              	.LBB8:
- 180              		.loc 1 41 10
- 181              		.loc 1 41 23 is_stmt 0
- 182 0096 02CC     		sw	zero,24(sp)
- 183              	.L12:
- 184              		.loc 1 41 32 discriminator 1
- 185 0098 E247     		lw	a5,24(sp)
- 186              		.loc 1 41 5 discriminator 1
- 187 009a 63D0F404 		ble	a5,s1,.L13
- 188              	.LBE8:
-  42:stepper.c     **** 
-  43:stepper.c     ****     gpio_bit_reset(GPIOA, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);
- 189              		.loc 1 43 5 is_stmt 1
- 190 009e BD45     		li	a1,15
- 191 00a0 2285     		mv	a0,s0
- 192 00a2 97000000 		call	gpio_bit_reset
- 192      E7800000 
- 193              	.LVL13:
-  44:stepper.c     ****     for (volatile int i = 0; i < 100000; i++){}
- 194              		.loc 1 44 5
- 195              	.LBB9:
- 196              		.loc 1 44 10
- 197              		.loc 1 44 23 is_stmt 0
- 198 00aa 02CE     		sw	zero,28(sp)
- 199              	.L14:
- 200              		.loc 1 44 32 discriminator 1
- 201 00ac F247     		lw	a5,28(sp)
- 202              		.loc 1 44 5 discriminator 1
- 203 00ae E3C4F4F6 		bgt	a5,s1,.L16
- 204              		.loc 1 44 47 is_stmt 1 discriminator 3
- 205              		.loc 1 44 43 is_stmt 0 discriminator 3
- 206 00b2 F247     		lw	a5,28(sp)
- 207 00b4 8507     		addi	a5,a5,1
- 208 00b6 3ECE     		sw	a5,28(sp)
- 209 00b8 D5BF     		j	.L14
- 210              	.L5:
- 211              	.LBE9:
- 212              	.LBB10:
-  24:stepper.c     ****     gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_1);
- 213              		.loc 1 24 47 is_stmt 1 discriminator 3
-  24:stepper.c     ****     gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_1);
- 214              		.loc 1 24 43 is_stmt 0 discriminator 3
- 215 00ba A247     		lw	a5,8(sp)
- 216 00bc 8507     		addi	a5,a5,1
- 217 00be 3EC4     		sw	a5,8(sp)
- 218 00c0 95B7     		j	.L4
- 219              	.L7:
- 220              	.LBE10:
- 221              	.LBB11:
-  26:stepper.c     **** 
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 6
-
-
- 222              		.loc 1 26 47 is_stmt 1 discriminator 3
-  26:stepper.c     **** 
- 223              		.loc 1 26 43 is_stmt 0 discriminator 3
- 224 00c2 B247     		lw	a5,12(sp)
- 225 00c4 8507     		addi	a5,a5,1
- 226 00c6 3EC6     		sw	a5,12(sp)
- 227 00c8 85BF     		j	.L6
- 228              	.L9:
- 229              	.LBE11:
- 230              	.LBB12:
-  31:stepper.c     **** 
- 231              		.loc 1 31 47 is_stmt 1 discriminator 3
-  31:stepper.c     **** 
- 232              		.loc 1 31 43 is_stmt 0 discriminator 3
- 233 00ca C247     		lw	a5,16(sp)
- 234 00cc 8507     		addi	a5,a5,1
- 235 00ce 3EC8     		sw	a5,16(sp)
- 236 00d0 61B7     		j	.L8
- 237              	.L11:
- 238              	.LBE12:
- 239              	.LBB13:
-  36:stepper.c     **** 
- 240              		.loc 1 36 47 is_stmt 1 discriminator 3
-  36:stepper.c     **** 
- 241              		.loc 1 36 43 is_stmt 0 discriminator 3
- 242 00d2 D247     		lw	a5,20(sp)
- 243 00d4 8507     		addi	a5,a5,1
- 244 00d6 3ECA     		sw	a5,20(sp)
- 245 00d8 45B7     		j	.L10
- 246              	.L13:
- 247              	.LBE13:
- 248              	.LBB14:
-  41:stepper.c     **** 
- 249              		.loc 1 41 47 is_stmt 1 discriminator 3
-  41:stepper.c     **** 
- 250              		.loc 1 41 43 is_stmt 0 discriminator 3
- 251 00da E247     		lw	a5,24(sp)
- 252 00dc 8507     		addi	a5,a5,1
- 253 00de 3ECC     		sw	a5,24(sp)
- 254 00e0 65BF     		j	.L12
- 255              	.LBE14:
- 256              		.cfi_endproc
- 257              	.LFE3:
- 259              		.text
- 260              	.Letext0:
- 261              		.file 2 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
- 262              		.file 3 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
- 263              		.file 4 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_gpio.h"
- 264              		.file 5 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_rcu.h"
- 265              		.file 6 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 7
+ 184 0042 B240     		lw	ra,12(sp)
+ 185              		.cfi_remember_state
+ 186              		.cfi_restore 1
+ 187 0044 2244     		lw	s0,8(sp)
+ 188              		.cfi_restore 8
+ 189 0046 9244     		lw	s1,4(sp)
+ 190              		.cfi_restore 9
+ 191              	.LVL10:
+ 192 0048 4101     		addi	sp,sp,16
+ 193              	.LCFI3:
+ 194              		.cfi_def_cfa_offset 0
+ 195 004a 8280     		jr	ra
+ 196              	.LVL11:
+ 197              	.L16:
+ 198              	.LCFI4:
+ 199              		.cfi_restore_state
+  28:stepper.c     ****     }
+ 200              		.loc 1 28 9 is_stmt 1
+  28:stepper.c     ****     }
+ 201              		.loc 1 28 20 is_stmt 0
+ 202 004c 9843     		lw	a4,0(a5)
+ 203 004e 7D17     		addi	a4,a4,-1
+ 204 0050 EDB7     		j	.L17
+ 205              	.L18:
+  34:stepper.c     ****         CurrentStep=0;
+ 206              		.loc 1 34 10 is_stmt 1
+  34:stepper.c     ****         CurrentStep=0;
+ 207              		.loc 1 34 12 is_stmt 0
+ 208 0052 9D46     		li	a3,7
+ 209 0054 E3D6E6FE 		ble	a4,a3,.L22
+  35:stepper.c     ****     }
+ 210              		.loc 1 35 9 is_stmt 1
+  35:stepper.c     ****     }
+ 211              		.loc 1 35 20 is_stmt 0
+ 212 0058 23A00700 		sw	zero,0(a5)
+  37:stepper.c     **** 
+ 213              		.loc 1 37 1
+ 214 005c DDB7     		j	.L15
+ 215              		.cfi_endproc
+ 216              	.LFE3:
+ 218              		.section	.sbss.CurrentStep,"aw",@nobits
+ 219              		.align	2
+ 220              		.set	.LANCHOR0,. + 0
+ 223              	CurrentStep:
+ 224 0000 00000000 		.zero	4
+ 225              		.text
+ 226              	.Letext0:
+ 227              		.file 2 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
+ 228              		.file 3 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
+ 229              		.file 4 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_gpio.h"
+ 230              		.file 5 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_rcu.h"
+ 231              		.file 6 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stepper.c
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:13     .text.initStep:0000000000000000 initStep
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:17     .text.initStep:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:18     .text.initStep:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:19     .text.initStep:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:20     .text.initStep:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:22     .text.initStep:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:24     .text.initStep:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:26     .text.initStep:0000000000000006 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:28     .text.initStep:000000000000000a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:29     .text.initStep:000000000000000a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:31     .text.initStep:000000000000000a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:34     .text.initStep:0000000000000012 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:42     .text.initStep:0000000000000028 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:44     .text.initStep:000000000000002c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:45     .text.initStep:000000000000002e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:47     .text.initStep:0000000000000030 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:49     .text.initStep:0000000000000030 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:51     .text.initStep:0000000000000032 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:53     .text.initStep:0000000000000034 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:55     .text.initStep:0000000000000034 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:57     .text.initStep:000000000000003c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:64     .text.execStep:0000000000000000 execStep
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:67     .text.execStep:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:69     .text.execStep:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:71     .text.execStep:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:74     .text.execStep:0000000000000006 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:75     .text.execStep:0000000000000006 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:77     .text.execStep:0000000000000006 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:80     .text.execStep:000000000000000a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:83     .text.execStep:000000000000000c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:84     .text.execStep:000000000000000e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:86     .text.execStep:000000000000000e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:89     .text.execStep:0000000000000012 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:94     .text.execStep:0000000000000016 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:95     .text.execStep:0000000000000016 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:101    .text.execStep:0000000000000022 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:102    .text.execStep:0000000000000022 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:103    .text.execStep:0000000000000022 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:106    .text.execStep:0000000000000024 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:108    .text.execStep:0000000000000026 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:111    .text.execStep:000000000000002a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:117    .text.execStep:0000000000000036 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:118    .text.execStep:0000000000000036 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:119    .text.execStep:0000000000000036 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:122    .text.execStep:0000000000000038 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:124    .text.execStep:000000000000003a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:127    .text.execStep:000000000000003e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:132    .text.execStep:000000000000004a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:138    .text.execStep:0000000000000056 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:139    .text.execStep:0000000000000056 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:140    .text.execStep:0000000000000056 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:143    .text.execStep:0000000000000058 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:145    .text.execStep:000000000000005a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:148    .text.execStep:000000000000005e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:153    .text.execStep:000000000000006a .L0 
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 8
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:13     .text.initStep:0000000000000000 initStep
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:17     .text.initStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:18     .text.initStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:19     .text.initStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:20     .text.initStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:22     .text.initStep:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:24     .text.initStep:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:26     .text.initStep:0000000000000006 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:27     .text.initStep:0000000000000008 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:29     .text.initStep:0000000000000008 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:32     .text.initStep:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:33     .text.initStep:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:34     .text.initStep:0000000000000012 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:36     .text.initStep:0000000000000012 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:38     .text.initStep:0000000000000016 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:39     .text.initStep:0000000000000016 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:44     .text.initStep:0000000000000020 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:46     .text.initStep:0000000000000022 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:48     .text.initStep:0000000000000022 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:50     .text.initStep:000000000000002a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:57     .text.setStep:0000000000000000 setStep
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:60     .text.setStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:62     .text.setStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:63     .text.setStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:87     .text.setStep:0000000000000016 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:90     .text.setStep:0000000000000018 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:96     .text.setStep:0000000000000028 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:100    .text.setStep:000000000000002c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:104    .text.setStep:0000000000000030 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:108    .text.setStep:0000000000000034 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:112    .text.setStep:0000000000000038 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:116    .text.setStep:000000000000003c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:120    .text.setStep:0000000000000040 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:125    .text.setStep:0000000000000044 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:126    .text.setStep:0000000000000046 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:133    .text.execStep:0000000000000000 execStep
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:136    .text.execStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:138    .text.execStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:139    .text.execStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:140    .text.execStep:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:142    .text.execStep:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:144    .text.execStep:0000000000000004 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:147    .text.execStep:0000000000000006 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:152    .text.execStep:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:154    .text.execStep:0000000000000014 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:155    .text.execStep:0000000000000014 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:157    .text.execStep:0000000000000014 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:160    .text.execStep:000000000000001c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:165    .text.execStep:000000000000002c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:166    .text.execStep:000000000000002c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:170    .text.execStep:0000000000000036 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:171    .text.execStep:0000000000000036 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:175    .text.execStep:000000000000003a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:176    .text.execStep:000000000000003a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:178    .text.execStep:000000000000003e .L0 
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 8
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:159    .text.execStep:0000000000000076 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:160    .text.execStep:0000000000000076 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:161    .text.execStep:0000000000000076 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:164    .text.execStep:0000000000000078 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:166    .text.execStep:000000000000007a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:169    .text.execStep:000000000000007e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:174    .text.execStep:000000000000008a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:180    .text.execStep:0000000000000096 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:181    .text.execStep:0000000000000096 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:182    .text.execStep:0000000000000096 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:185    .text.execStep:0000000000000098 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:187    .text.execStep:000000000000009a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:190    .text.execStep:000000000000009e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:196    .text.execStep:00000000000000aa .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:197    .text.execStep:00000000000000aa .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:198    .text.execStep:00000000000000aa .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:201    .text.execStep:00000000000000ac .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:203    .text.execStep:00000000000000ae .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:205    .text.execStep:00000000000000b2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:206    .text.execStep:00000000000000b2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:214    .text.execStep:00000000000000ba .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:215    .text.execStep:00000000000000ba .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:223    .text.execStep:00000000000000c2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:224    .text.execStep:00000000000000c2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:232    .text.execStep:00000000000000ca .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:233    .text.execStep:00000000000000ca .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:241    .text.execStep:00000000000000d2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:242    .text.execStep:00000000000000d2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:250    .text.execStep:00000000000000da .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:251    .text.execStep:00000000000000da .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:256    .text.execStep:00000000000000e2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:60     .text.initStep:000000000000003c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:259    .text.execStep:00000000000000e2 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:179    .text.execStep:000000000000003e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:184    .text.execStep:0000000000000042 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:185    .text.execStep:0000000000000044 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:186    .text.execStep:0000000000000044 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:188    .text.execStep:0000000000000046 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:190    .text.execStep:0000000000000048 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:194    .text.execStep:000000000000004a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:199    .text.execStep:000000000000004c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:201    .text.execStep:000000000000004c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:202    .text.execStep:000000000000004c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:207    .text.execStep:0000000000000052 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:208    .text.execStep:0000000000000052 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:211    .text.execStep:0000000000000058 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:212    .text.execStep:0000000000000058 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:214    .text.execStep:000000000000005c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:215    .text.execStep:000000000000005e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:220    .sbss.CurrentStep:0000000000000000 .LANCHOR0
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:223    .sbss.CurrentStep:0000000000000000 CurrentStep
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:53     .text.initStep:000000000000002a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:129    .text.setStep:0000000000000046 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:218    .text.execStep:000000000000005e .L0 
                      .debug_frame:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:210    .text.execStep:00000000000000ba .L5
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:219    .text.execStep:00000000000000c2 .L7
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:228    .text.execStep:00000000000000ca .L9
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:237    .text.execStep:00000000000000d2 .L11
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:246    .text.execStep:00000000000000da .L13
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:91     .text.execStep:0000000000000016 .L16
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:199    .text.execStep:00000000000000ac .L14
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:104    .text.execStep:0000000000000024 .L4
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:120    .text.execStep:0000000000000038 .L6
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:141    .text.execStep:0000000000000058 .L8
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:162    .text.execStep:0000000000000078 .L10
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:183    .text.execStep:0000000000000098 .L12
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:828    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1283   .debug_str:00000000000001f2 .LASF58
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1289   .debug_str:0000000000000295 .LASF59
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1259   .debug_str:0000000000000118 .LASF60
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1161   .debug_ranges:0000000000000000 .Ldebug_ranges0
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1203   .debug_line:0000000000000000 .Ldebug_line0
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1279   .debug_str:00000000000001db .LASF0
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1273   .debug_str:00000000000001af .LASF1
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1327   .debug_str:0000000000000356 .LASF6
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1263   .debug_str:000000000000016e .LASF2
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1227   .debug_str:0000000000000079 .LASF3
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 9
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:75     .rodata.setStep:0000000000000000 .L6
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:123    .text.setStep:0000000000000044 .L3
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:88     .text.setStep:0000000000000018 .L14
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:85     .text.setStep:0000000000000016 .L13
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:94     .text.setStep:0000000000000028 .L12
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:98     .text.setStep:000000000000002c .L11
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:102    .text.setStep:0000000000000030 .L10
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:106    .text.setStep:0000000000000034 .L9
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:110    .text.setStep:0000000000000038 .L8
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:114    .text.setStep:000000000000003c .L7
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:118    .text.setStep:0000000000000040 .L5
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:197    .text.execStep:000000000000004c .L16
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:205    .text.execStep:0000000000000052 .L18
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:173    .text.execStep:000000000000003a .L17
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:180    .text.execStep:0000000000000040 .L22
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:182    .text.execStep:0000000000000042 .L15
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:619    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1087   .debug_str:00000000000001e8 .LASF58
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1093   .debug_str:000000000000028b .LASF59
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1065   .debug_str:0000000000000118 .LASF60
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:999    .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1009   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1085   .debug_str:00000000000001db .LASF0
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1079   .debug_str:00000000000001af .LASF1
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1135   .debug_str:0000000000000360 .LASF6
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1069   .debug_str:000000000000016e .LASF2
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1033   .debug_str:0000000000000079 .LASF3
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1091   .debug_str:0000000000000278 .LASF4
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1043   .debug_str:00000000000000a7 .LASF5
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1027   .debug_str:0000000000000059 .LASF7
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1111   .debug_str:00000000000002e3 .LASF8
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1025   .debug_str:000000000000004b .LASF9
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1081   .debug_str:00000000000001bb .LASF10
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1035   .debug_str:0000000000000083 .LASF11
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1083   .debug_str:00000000000001d2 .LASF12
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 9
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1287   .debug_str:0000000000000282 .LASF4
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1237   .debug_str:00000000000000a7 .LASF5
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1221   .debug_str:0000000000000059 .LASF7
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1305   .debug_str:00000000000002e1 .LASF8
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1219   .debug_str:000000000000004b .LASF9
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1275   .debug_str:00000000000001bb .LASF10
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1229   .debug_str:0000000000000083 .LASF11
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1277   .debug_str:00000000000001d2 .LASF12
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1207   .debug_str:0000000000000009 .LASF61
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1297   .debug_str:00000000000002c0 .LASF13
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1299   .debug_str:00000000000002c9 .LASF14
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1325   .debug_str:000000000000034e .LASF15
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1323   .debug_str:0000000000000345 .LASF16
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1317   .debug_str:0000000000000327 .LASF17
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1249   .debug_str:00000000000000e1 .LASF18
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1251   .debug_str:00000000000000ec .LASF19
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1253   .debug_str:00000000000000f7 .LASF20
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1255   .debug_str:0000000000000102 .LASF21
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1257   .debug_str:000000000000010d .LASF22
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1245   .debug_str:00000000000000cb .LASF23
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1235   .debug_str:000000000000009d .LASF24
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1241   .debug_str:00000000000000b9 .LASF25
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1243   .debug_str:00000000000000c2 .LASF26
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1313   .debug_str:0000000000000311 .LASF27
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1315   .debug_str:000000000000031c .LASF28
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1319   .debug_str:0000000000000331 .LASF29
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1321   .debug_str:000000000000033b .LASF30
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1291   .debug_str:000000000000029f .LASF31
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1293   .debug_str:00000000000002a8 .LASF32
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1231   .debug_str:000000000000008b .LASF33
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1233   .debug_str:0000000000000094 .LASF34
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1271   .debug_str:00000000000001a6 .LASF35
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1285   .debug_str:000000000000027a .LASF36
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1301   .debug_str:00000000000002d2 .LASF37
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1225   .debug_str:0000000000000071 .LASF38
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1303   .debug_str:00000000000002da .LASF39
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1209   .debug_str:0000000000000019 .LASF40
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1211   .debug_str:0000000000000023 .LASF41
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1213   .debug_str:000000000000002d .LASF42
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1215   .debug_str:0000000000000037 .LASF43
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1217   .debug_str:0000000000000041 .LASF44
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1267   .debug_str:0000000000000194 .LASF45
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1269   .debug_str:000000000000019d .LASF46
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1247   .debug_str:00000000000000d6 .LASF47
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1239   .debug_str:00000000000000b0 .LASF48
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1311   .debug_str:0000000000000306 .LASF49
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1261   .debug_str:0000000000000162 .LASF50
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1281   .debug_str:00000000000001e8 .LASF51
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1205   .debug_str:0000000000000000 .LASF52
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:65     .text.execStep:0000000000000000 .LFB3
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:257    .text.execStep:00000000000000e2 .LFE3
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1101   .debug_loc:0000000000000000 .LLST1
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1114   .debug_loc:0000000000000020 .LLST2
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:195    .text.execStep:00000000000000aa .LBB9
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:211    .text.execStep:00000000000000ba .LBE9
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:98     .text.execStep:0000000000000022 .LVL5
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:114    .text.execStep:0000000000000036 .LVL6
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s 			page 10
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1013   .debug_str:0000000000000009 .LASF61
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1101   .debug_str:00000000000002b3 .LASF13
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1103   .debug_str:00000000000002bc .LASF14
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1133   .debug_str:0000000000000358 .LASF15
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1131   .debug_str:000000000000034f .LASF16
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1123   .debug_str:0000000000000329 .LASF17
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1055   .debug_str:00000000000000e1 .LASF18
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1057   .debug_str:00000000000000ec .LASF19
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1059   .debug_str:00000000000000f7 .LASF20
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1061   .debug_str:0000000000000102 .LASF21
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1063   .debug_str:000000000000010d .LASF22
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1051   .debug_str:00000000000000cb .LASF23
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1041   .debug_str:000000000000009d .LASF24
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1047   .debug_str:00000000000000b9 .LASF25
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1049   .debug_str:00000000000000c2 .LASF26
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1119   .debug_str:0000000000000313 .LASF27
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1121   .debug_str:000000000000031e .LASF28
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1125   .debug_str:0000000000000333 .LASF29
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1127   .debug_str:000000000000033d .LASF30
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1095   .debug_str:0000000000000295 .LASF31
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1097   .debug_str:000000000000029e .LASF32
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1037   .debug_str:000000000000008b .LASF33
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1039   .debug_str:0000000000000094 .LASF34
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1077   .debug_str:00000000000001a6 .LASF35
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1089   .debug_str:0000000000000270 .LASF36
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1107   .debug_str:00000000000002d4 .LASF37
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1031   .debug_str:0000000000000071 .LASF38
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1109   .debug_str:00000000000002dc .LASF39
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1015   .debug_str:0000000000000019 .LASF40
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1017   .debug_str:0000000000000023 .LASF41
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1019   .debug_str:000000000000002d .LASF42
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1021   .debug_str:0000000000000037 .LASF43
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1023   .debug_str:0000000000000041 .LASF44
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1073   .debug_str:0000000000000194 .LASF45
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1075   .debug_str:000000000000019d .LASF46
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1053   .debug_str:00000000000000d6 .LASF47
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1045   .debug_str:00000000000000b0 .LASF48
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1117   .debug_str:0000000000000308 .LASF49
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1067   .debug_str:0000000000000162 .LASF50
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1099   .debug_str:00000000000002a7 .LASF62
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1129   .debug_str:0000000000000347 .LASF51
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:58     .text.setStep:0000000000000000 .LFB4
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:127    .text.setStep:0000000000000046 .LFE4
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:901    .debug_loc:0000000000000000 .LLST1
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:93     .text.setStep:0000000000000028 .LVL4
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1011   .debug_str:0000000000000000 .LASF52
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:134    .text.execStep:0000000000000000 .LFB3
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:216    .text.execStep:000000000000005e .LFE3
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:919    .debug_loc:000000000000002c .LLST2
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:942    .debug_loc:0000000000000064 .LLST3
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:158    .text.execStep:000000000000001c .LVL8
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:163    .text.execStep:000000000000002c .LVL9
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1113   .debug_str:00000000000002f5 .LASF53
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:14     .text.initStep:0000000000000000 .LFB2
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:51     .text.initStep:000000000000002a .LFE2
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:964    .debug_loc:000000000000009b .LLST0
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:30     .text.initStep:0000000000000010 .LVL0
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s 			page 10
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:130    .text.execStep:000000000000004a .LVL7
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:135    .text.execStep:0000000000000056 .LVL8
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:151    .text.execStep:000000000000006a .LVL9
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:156    .text.execStep:0000000000000076 .LVL10
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:172    .text.execStep:000000000000008a .LVL11
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:177    .text.execStep:0000000000000096 .LVL12
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:193    .text.execStep:00000000000000aa .LVL13
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1307   .debug_str:00000000000002f3 .LASF53
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:14     .text.initStep:0000000000000000 .LFB2
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:58     .text.initStep:000000000000003c .LFE2
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1128   .debug_loc:0000000000000041 .LLST0
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:32     .text.initStep:0000000000000012 .LVL0
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:40     .text.initStep:0000000000000028 .LVL1
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:56     .text.initStep:000000000000003c .LVL2
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1223   .debug_str:0000000000000064 .LASF54
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1295   .debug_str:00000000000002b1 .LASF55
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1265   .debug_str:000000000000017c .LASF56
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:1309   .debug_str:00000000000002fc .LASF57
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:70     .text.execStep:0000000000000002 .LCFI2
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:68     .text.execStep:0000000000000000 .LVL3
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:90     .text.execStep:0000000000000016 .LVL4
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:21     .text.initStep:0000000000000002 .LCFI0
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:52     .text.initStep:0000000000000034 .LCFI1
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:267    .debug_info:0000000000000000 .Ldebug_info0
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:78     .text.execStep:000000000000000a .LBB2
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:81     .text.execStep:000000000000000c .LBE2
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:87     .text.execStep:0000000000000012 .LBB3
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:92     .text.execStep:0000000000000016 .LBE3
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:100    .text.execStep:0000000000000022 .LBB4
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:109    .text.execStep:000000000000002a .LBE4
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:212    .text.execStep:00000000000000ba .LBB10
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:220    .text.execStep:00000000000000c2 .LBE10
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:116    .text.execStep:0000000000000036 .LBB5
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:125    .text.execStep:000000000000003e .LBE5
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:221    .text.execStep:00000000000000c2 .LBB11
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:229    .text.execStep:00000000000000ca .LBE11
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:137    .text.execStep:0000000000000056 .LBB6
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:146    .text.execStep:000000000000005e .LBE6
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:230    .text.execStep:00000000000000ca .LBB12
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:238    .text.execStep:00000000000000d2 .LBE12
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:158    .text.execStep:0000000000000076 .LBB7
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:167    .text.execStep:000000000000007e .LBE7
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:239    .text.execStep:00000000000000d2 .LBB13
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:247    .text.execStep:00000000000000da .LBE13
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:179    .text.execStep:0000000000000096 .LBB8
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:188    .text.execStep:000000000000009e .LBE8
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:248    .text.execStep:00000000000000da .LBB14
-C:\Users\YusefG\AppData\Local\Temp\ccxwwnE8.s:255    .text.execStep:00000000000000e2 .LBE14
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:49     .text.initStep:000000000000002a .LVL1
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1029   .debug_str:0000000000000064 .LASF54
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1105   .debug_str:00000000000002c5 .LASF55
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1071   .debug_str:000000000000017c .LASF56
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:1115   .debug_str:00000000000002fe .LASF57
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:61     .text.setStep:0000000000000000 .LVL2
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:68     .text.setStep:0000000000000010 .LVL3
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:122    .text.setStep:0000000000000044 .LVL5
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:141    .text.execStep:0000000000000002 .LCFI2
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:193    .text.execStep:000000000000004a .LCFI3
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:198    .text.execStep:000000000000004c .LCFI4
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:137    .text.execStep:0000000000000000 .LVL6
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:148    .text.execStep:000000000000000a .LVL7
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:191    .text.execStep:0000000000000048 .LVL10
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:196    .text.execStep:000000000000004c .LVL11
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:21     .text.initStep:0000000000000002 .LCFI0
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:45     .text.initStep:0000000000000022 .LCFI1
+C:\Users\YusefG\AppData\Local\Temp\ccfKGgnh.s:233    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 rcu_periph_clock_enable
 gpio_init
-gpio_bit_reset
 gpio_bit_set
+gpio_bit_reset

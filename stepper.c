@@ -18,8 +18,8 @@ void initStep(void){
 
 void execStep(int cw){
 
-    gpio_bit_reset(GPIOA, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3) 
-    setStep(CurrentStep)
+    gpio_bit_reset(GPIOA, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3); 
+    setStep(CurrentStep);
 
     if (cw==1){
         CurrentStep++;
@@ -29,10 +29,10 @@ void execStep(int cw){
     }
 
     if (CurrentStep<0){
-        CurrentStep=7
+        CurrentStep=7;
     }
     else if(CurrentStep>7){
-        CurrentStep=0
+        CurrentStep=0;
     }
 }    
 
@@ -44,7 +44,7 @@ void setStep(int n){
             break;
 
         case 1:
-            gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_1)
+            gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_1);
             break;
 
         case 2:
@@ -68,74 +68,8 @@ void setStep(int n){
             break;    
 
         case 7:
-            gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_3)    
-
+            gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_3);    
 
     }
         
 } 
- 
-    // while (1)
-    // {
-    // gpio_bit_set(GPIOA, GPIO_PIN_0);
-    // for (volatile int i = 0; i < 100000; i++){}
-    // gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_1);
-    // for (volatile int i = 0; i < 100000; i++){}
-
-    // gpio_bit_reset(GPIOA, GPIO_PIN_0);
-
-    // gpio_bit_set(GPIOA, GPIO_PIN_1 | GPIO_PIN_2);
-    // for (volatile int i = 0; i < 100000; i++){}
-
-    // gpio_bit_reset(GPIOA, GPIO_PIN_1);
-
-    // gpio_bit_set(GPIOA, GPIO_PIN_2 | GPIO_PIN_3);
-    // for (volatile int i = 0; i < 100000; i++){}
-
-    // gpio_bit_reset(GPIOA, GPIO_PIN_2);
-
-    // gpio_bit_set(GPIOA, GPIO_PIN_0 | GPIO_PIN_3);
-    // for (volatile int i = 0; i < 100000; i++){}
-
-    // gpio_bit_reset(GPIOA, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);
-    // for (volatile int i = 0; i < 100000; i++){}
-
-    // }
-
-     
-
-
-
-/*
-
-switch (cw)
-    {
-    case CW:
-
-        switch (NROFSTEPS)
-        {
-        case 0:
-            break;
-
-        case 1:
-            break;
-        
-        case 2:
-            break;
-
-        case 8:
-            NROFSTEPS=0;
-            break;
-        }
-
-        NROFSTEPS++;
-        break;
-
-
-    case CCW:
-        break;
-
-    default:
-        break;
-    }
-    */
