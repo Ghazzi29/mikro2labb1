@@ -1,0 +1,182 @@
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s 			page 1
+
+
+   1              		.file	"main.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv32i2p0_m2p0_a2p0_c2p0"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.section	.text.startup.main,"ax",@progbits
+  10              		.align	1
+  11              		.globl	main
+  13              	main:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** #include "gd32vf103.h"
+   2:main.c        **** #include "stepper.h"
+   3:main.c        **** 
+   4:main.c        **** int main(){
+  16              		.loc 1 4 11
+  17              		.cfi_startproc
+   5:main.c        **** 	uint32_t port = 0;
+  18              		.loc 1 5 2
+  19              	.LVL0:
+   6:main.c        **** 	uint32_t count = 0;
+  20              		.loc 1 6 2
+   7:main.c        **** 	rcu_periph_clock_enable(RCU_GPIOB);
+  21              		.loc 1 7 2
+   4:main.c        **** 	uint32_t port = 0;
+  22              		.loc 1 4 11 is_stmt 0
+  23 0000 4111     		addi	sp,sp,-16
+  24              	.LCFI0:
+  25              		.cfi_def_cfa_offset 16
+  26              		.loc 1 7 2
+  27 0002 13053060 		li	a0,1539
+   4:main.c        **** 	uint32_t port = 0;
+  28              		.loc 1 4 11
+  29 0006 06C6     		sw	ra,12(sp)
+  30              		.cfi_offset 1, -4
+  31              		.loc 1 7 2
+  32 0008 97000000 		call	rcu_periph_clock_enable
+  32      E7800000 
+  33              	.LVL1:
+   8:main.c        **** 	
+   9:main.c        **** 	initStep();
+  34              		.loc 1 9 2 is_stmt 1
+  35 0010 97000000 		call	initStep
+  35      E7800000 
+  36              	.LVL2:
+  10:main.c        **** 	execStep(1);
+  37              		.loc 1 10 2
+  38 0018 0545     		li	a0,1
+  39 001a 97000000 		call	execStep
+  39      E7800000 
+  40              	.LVL3:
+  11:main.c        **** }
+  41              		.loc 1 11 1 is_stmt 0
+  42 0022 B240     		lw	ra,12(sp)
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s 			page 2
+
+
+  43              		.cfi_restore 1
+  44 0024 0145     		li	a0,0
+  45 0026 4101     		addi	sp,sp,16
+  46              	.LCFI1:
+  47              		.cfi_def_cfa_offset 0
+  48 0028 8280     		jr	ra
+  49              		.cfi_endproc
+  50              	.LFE2:
+  52              		.text
+  53              	.Letext0:
+  54              		.file 2 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
+  55              		.file 3 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
+  56              		.file 4 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_rcu.h"
+  57              		.file 5 "stepper.h"
+  58              		.file 6 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:13     .text.startup.main:0000000000000000 main
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:17     .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:18     .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:20     .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:21     .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:22     .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:23     .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:25     .text.startup.main:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:27     .text.startup.main:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:29     .text.startup.main:0000000000000006 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:30     .text.startup.main:0000000000000008 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:32     .text.startup.main:0000000000000008 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:35     .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:38     .text.startup.main:0000000000000018 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:42     .text.startup.main:0000000000000022 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:43     .text.startup.main:0000000000000024 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:47     .text.startup.main:0000000000000028 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:49     .text.startup.main:000000000000002a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:52     .text.startup.main:000000000000002a .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:334    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:628    .debug_str:00000000000000c3 .LASF54
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:680    .debug_str:000000000000026a .LASF55
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:602    .debug_str:0000000000000000 .LASF56
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:594    .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:600    .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:664    .debug_str:000000000000020a .LASF0
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:716    .debug_str:0000000000000317 .LASF1
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:654    .debug_str:00000000000001d8 .LASF2
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:696    .debug_str:00000000000002bd .LASF3
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:648    .debug_str:00000000000001aa .LASF4
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:614    .debug_str:0000000000000085 .LASF5
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:658    .debug_str:00000000000001f1 .LASF9
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:644    .debug_str:000000000000018e .LASF6
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:678    .debug_str:000000000000025c .LASF7
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:666    .debug_str:0000000000000217 .LASF8
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:708    .debug_str:00000000000002f0 .LASF10
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:650    .debug_str:00000000000001bd .LASF57
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:704    .debug_str:00000000000002de .LASF11
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:706    .debug_str:00000000000002e7 .LASF12
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:624    .debug_str:00000000000000b3 .LASF13
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:676    .debug_str:0000000000000253 .LASF14
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:622    .debug_str:00000000000000a9 .LASF15
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:684    .debug_str:000000000000027c .LASF16
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:686    .debug_str:0000000000000287 .LASF17
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:618    .debug_str:0000000000000097 .LASF18
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:690    .debug_str:000000000000029c .LASF19
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:692    .debug_str:00000000000002a7 .LASF20
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:694    .debug_str:00000000000002b2 .LASF21
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:688    .debug_str:0000000000000292 .LASF22
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:632    .debug_str:0000000000000154 .LASF23
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:634    .debug_str:000000000000015d .LASF24
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:674    .debug_str:0000000000000248 .LASF25
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:656    .debug_str:00000000000001e6 .LASF26
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:606    .debug_str:0000000000000053 .LASF27
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s 			page 4
+
+
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:608    .debug_str:000000000000005d .LASF28
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:670    .debug_str:0000000000000236 .LASF29
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:672    .debug_str:000000000000023f .LASF30
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:710    .debug_str:00000000000002f9 .LASF31
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:712    .debug_str:0000000000000302 .LASF32
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:702    .debug_str:00000000000002d5 .LASF33
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:668    .debug_str:000000000000022e .LASF34
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:718    .debug_str:0000000000000323 .LASF35
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:626    .debug_str:00000000000000bb .LASF36
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:620    .debug_str:00000000000000a2 .LASF37
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:642    .debug_str:0000000000000184 .LASF38
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:646    .debug_str:00000000000001a0 .LASF39
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:636    .debug_str:0000000000000166 .LASF40
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:638    .debug_str:0000000000000170 .LASF41
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:640    .debug_str:000000000000017a .LASF42
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:616    .debug_str:000000000000008e .LASF43
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:660    .debug_str:00000000000001fc .LASF44
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:682    .debug_str:0000000000000271 .LASF45
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:630    .debug_str:000000000000014b .LASF46
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:652    .debug_str:00000000000001cd .LASF47
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:714    .debug_str:000000000000030b .LASF48
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:662    .debug_str:0000000000000205 .LASF58
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:14     .text.startup.main:0000000000000000 .LFB2
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:50     .text.startup.main:000000000000002a .LFE2
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:563    .debug_loc:0000000000000000 .LLST0
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:698    .debug_str:00000000000002c7 .LASF49
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:612    .debug_str:000000000000007f .LASF50
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:33     .text.startup.main:0000000000000010 .LVL1
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:36     .text.startup.main:0000000000000018 .LVL2
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:40     .text.startup.main:0000000000000022 .LVL3
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:610    .debug_str:0000000000000067 .LASF51
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:700    .debug_str:00000000000002cc .LASF52
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:604    .debug_str:000000000000004a .LASF53
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:24     .text.startup.main:0000000000000002 .LCFI0
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:46     .text.startup.main:0000000000000028 .LCFI1
+C:\Users\YusefG\AppData\Local\Temp\ccBiscrx.s:60     .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+rcu_periph_clock_enable
+initStep
+execStep
