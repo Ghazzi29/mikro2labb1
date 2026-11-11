@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 1
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 1
 
 
    1              		.file	"sensor.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 1
   18:sensor.c      ****     // Configure PA5 and PA6 as inputs with pull-up
   19:sensor.c      ****     gpio_init(GPIOA, GPIO_MODE_IPU,
   35              		.loc 1 19 5
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 2
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 2
 
 
   36 001c 37150140 		li	a0,1073811456
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 1
   67      E7800000 
   68              	.LVL7:
   37:sensor.c      ****     exti_interrupt_flag_clear(EXTI_6);
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 3
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 3
 
 
   69              		.loc 1 37 5
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 1
   45:sensor.c      **** 
  108              		.loc 1 45 31
  109 0006 06C6     		sw	ra,12(sp)
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 4
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 4
 
 
  110              		.cfi_offset 1, -4
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 1
  147              	.L7:
   65:sensor.c      ****             break;
   66:sensor.c      ****         }
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 5
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 5
 
 
   67:sensor.c      **** 
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 1
   59:sensor.c      ****             if (currentTemp==min_temp){phase++;}
  183              		.loc 1 59 13 is_stmt 1
   59:sensor.c      ****             if (currentTemp==min_temp){phase++;}
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 6
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 6
 
 
  184              		.loc 1 59 24 is_stmt 0
@@ -357,307 +357,307 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 1
  234              		.file 7 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
  235              		.file 8 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_gpio.h"
  236              		.file 9 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_eclic.h"
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 7
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sensor.c
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:13     .text.initSensorInterrupt:0000000000000000 initSensorInterrupt
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:17     .text.initSensorInterrupt:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:18     .text.initSensorInterrupt:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:19     .text.initSensorInterrupt:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:20     .text.initSensorInterrupt:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:22     .text.initSensorInterrupt:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:24     .text.initSensorInterrupt:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:26     .text.initSensorInterrupt:0000000000000006 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:27     .text.initSensorInterrupt:0000000000000008 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:29     .text.initSensorInterrupt:0000000000000008 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:32     .text.initSensorInterrupt:0000000000000010 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:36     .text.initSensorInterrupt:000000000000001c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:44     .text.initSensorInterrupt:0000000000000036 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:49     .text.initSensorInterrupt:0000000000000042 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:54     .text.initSensorInterrupt:000000000000004e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:60     .text.initSensorInterrupt:000000000000005e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:66     .text.initSensorInterrupt:000000000000006e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:70     .text.initSensorInterrupt:000000000000007a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:74     .text.initSensorInterrupt:0000000000000086 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:75     .text.initSensorInterrupt:0000000000000086 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:76     .text.initSensorInterrupt:0000000000000088 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:78     .text.initSensorInterrupt:0000000000000088 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:80     .text.initSensorInterrupt:000000000000008a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:81     .text.initSensorInterrupt:000000000000008a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:84     .text.initSensorInterrupt:0000000000000090 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:86     .text.initSensorInterrupt:0000000000000092 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:88     .text.initSensorInterrupt:0000000000000092 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:90     .text.initSensorInterrupt:000000000000009a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:97     .text.EXTI5_9_IRQHandler:0000000000000000 EXTI5_9_IRQHandler
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:100    .text.EXTI5_9_IRQHandler:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:101    .text.EXTI5_9_IRQHandler:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:102    .text.EXTI5_9_IRQHandler:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:103    .text.EXTI5_9_IRQHandler:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:105    .text.EXTI5_9_IRQHandler:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:107    .text.EXTI5_9_IRQHandler:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:109    .text.EXTI5_9_IRQHandler:0000000000000006 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:110    .text.EXTI5_9_IRQHandler:0000000000000008 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:112    .text.EXTI5_9_IRQHandler:0000000000000008 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:115    .text.EXTI5_9_IRQHandler:0000000000000010 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:117    .text.EXTI5_9_IRQHandler:0000000000000012 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:118    .text.EXTI5_9_IRQHandler:0000000000000012 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:122    .text.EXTI5_9_IRQHandler:000000000000001c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:129    .text.EXTI5_9_IRQHandler:0000000000000030 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:130    .text.EXTI5_9_IRQHandler:0000000000000030 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:135    .text.EXTI5_9_IRQHandler:000000000000003e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:136    .text.EXTI5_9_IRQHandler:000000000000003e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:141    .text.EXTI5_9_IRQHandler:000000000000004a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:143    .text.EXTI5_9_IRQHandler:000000000000004e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:144    .text.EXTI5_9_IRQHandler:000000000000004e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:149    .text.EXTI5_9_IRQHandler:0000000000000058 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:154    .text.EXTI5_9_IRQHandler:0000000000000064 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:155    .text.EXTI5_9_IRQHandler:0000000000000064 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:159    .text.EXTI5_9_IRQHandler:0000000000000070 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:161    .text.EXTI5_9_IRQHandler:0000000000000072 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:162    .text.EXTI5_9_IRQHandler:0000000000000072 .L0 
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 8
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:13     .text.initSensorInterrupt:0000000000000000 initSensorInterrupt
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:17     .text.initSensorInterrupt:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:18     .text.initSensorInterrupt:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:19     .text.initSensorInterrupt:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:20     .text.initSensorInterrupt:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:22     .text.initSensorInterrupt:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:24     .text.initSensorInterrupt:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:26     .text.initSensorInterrupt:0000000000000006 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:27     .text.initSensorInterrupt:0000000000000008 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:29     .text.initSensorInterrupt:0000000000000008 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:32     .text.initSensorInterrupt:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:36     .text.initSensorInterrupt:000000000000001c .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:44     .text.initSensorInterrupt:0000000000000036 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:49     .text.initSensorInterrupt:0000000000000042 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:54     .text.initSensorInterrupt:000000000000004e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:60     .text.initSensorInterrupt:000000000000005e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:66     .text.initSensorInterrupt:000000000000006e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:70     .text.initSensorInterrupt:000000000000007a .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:74     .text.initSensorInterrupt:0000000000000086 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:75     .text.initSensorInterrupt:0000000000000086 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:76     .text.initSensorInterrupt:0000000000000088 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:78     .text.initSensorInterrupt:0000000000000088 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:80     .text.initSensorInterrupt:000000000000008a .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:81     .text.initSensorInterrupt:000000000000008a .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:84     .text.initSensorInterrupt:0000000000000090 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:86     .text.initSensorInterrupt:0000000000000092 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:88     .text.initSensorInterrupt:0000000000000092 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:90     .text.initSensorInterrupt:000000000000009a .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:97     .text.EXTI5_9_IRQHandler:0000000000000000 EXTI5_9_IRQHandler
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:100    .text.EXTI5_9_IRQHandler:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:101    .text.EXTI5_9_IRQHandler:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:102    .text.EXTI5_9_IRQHandler:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:103    .text.EXTI5_9_IRQHandler:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:105    .text.EXTI5_9_IRQHandler:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:107    .text.EXTI5_9_IRQHandler:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:109    .text.EXTI5_9_IRQHandler:0000000000000006 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:110    .text.EXTI5_9_IRQHandler:0000000000000008 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:112    .text.EXTI5_9_IRQHandler:0000000000000008 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:115    .text.EXTI5_9_IRQHandler:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:117    .text.EXTI5_9_IRQHandler:0000000000000012 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:118    .text.EXTI5_9_IRQHandler:0000000000000012 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:122    .text.EXTI5_9_IRQHandler:000000000000001c .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:129    .text.EXTI5_9_IRQHandler:0000000000000030 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:130    .text.EXTI5_9_IRQHandler:0000000000000030 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:135    .text.EXTI5_9_IRQHandler:000000000000003e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:136    .text.EXTI5_9_IRQHandler:000000000000003e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:141    .text.EXTI5_9_IRQHandler:000000000000004a .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:143    .text.EXTI5_9_IRQHandler:000000000000004e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:144    .text.EXTI5_9_IRQHandler:000000000000004e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:149    .text.EXTI5_9_IRQHandler:0000000000000058 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:154    .text.EXTI5_9_IRQHandler:0000000000000064 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:155    .text.EXTI5_9_IRQHandler:0000000000000064 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:159    .text.EXTI5_9_IRQHandler:0000000000000070 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:161    .text.EXTI5_9_IRQHandler:0000000000000072 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:162    .text.EXTI5_9_IRQHandler:0000000000000072 .L0 
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 8
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:163    .text.EXTI5_9_IRQHandler:0000000000000074 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:164    .text.EXTI5_9_IRQHandler:0000000000000074 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:166    .text.EXTI5_9_IRQHandler:0000000000000074 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:170    .text.EXTI5_9_IRQHandler:000000000000007e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:171    .text.EXTI5_9_IRQHandler:000000000000007e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:172    .text.EXTI5_9_IRQHandler:000000000000007e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:174    .text.EXTI5_9_IRQHandler:0000000000000082 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:176    .text.EXTI5_9_IRQHandler:0000000000000084 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:178    .text.EXTI5_9_IRQHandler:0000000000000084 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:182    .text.EXTI5_9_IRQHandler:000000000000008c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:184    .text.EXTI5_9_IRQHandler:000000000000008c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:185    .text.EXTI5_9_IRQHandler:000000000000008c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:190    .text.EXTI5_9_IRQHandler:000000000000009a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:191    .text.EXTI5_9_IRQHandler:000000000000009a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:197    .text.EXTI5_9_IRQHandler:00000000000000a8 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:198    .text.EXTI5_9_IRQHandler:00000000000000a8 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:203    .text.EXTI5_9_IRQHandler:00000000000000b6 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:204    .text.EXTI5_9_IRQHandler:00000000000000b6 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:210    .text.EXTI5_9_IRQHandler:00000000000000c4 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:211    .text.EXTI5_9_IRQHandler:00000000000000c6 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:214    .text.EXTI5_9_IRQHandler:00000000000000c8 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:216    .text.EXTI5_9_IRQHandler:00000000000000ca .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:225    .sbss.sensorTriggered:0000000000000000 sensorTriggered
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:222    .sbss.sensorTriggered:0000000000000000 .LANCHOR0
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:93     .text.initSensorInterrupt:000000000000009a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:220    .text.EXTI5_9_IRQHandler:00000000000000ca .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:163    .text.EXTI5_9_IRQHandler:0000000000000074 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:164    .text.EXTI5_9_IRQHandler:0000000000000074 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:166    .text.EXTI5_9_IRQHandler:0000000000000074 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:170    .text.EXTI5_9_IRQHandler:000000000000007e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:171    .text.EXTI5_9_IRQHandler:000000000000007e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:172    .text.EXTI5_9_IRQHandler:000000000000007e .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:174    .text.EXTI5_9_IRQHandler:0000000000000082 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:176    .text.EXTI5_9_IRQHandler:0000000000000084 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:178    .text.EXTI5_9_IRQHandler:0000000000000084 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:182    .text.EXTI5_9_IRQHandler:000000000000008c .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:184    .text.EXTI5_9_IRQHandler:000000000000008c .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:185    .text.EXTI5_9_IRQHandler:000000000000008c .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:190    .text.EXTI5_9_IRQHandler:000000000000009a .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:191    .text.EXTI5_9_IRQHandler:000000000000009a .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:197    .text.EXTI5_9_IRQHandler:00000000000000a8 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:198    .text.EXTI5_9_IRQHandler:00000000000000a8 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:203    .text.EXTI5_9_IRQHandler:00000000000000b6 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:204    .text.EXTI5_9_IRQHandler:00000000000000b6 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:210    .text.EXTI5_9_IRQHandler:00000000000000c4 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:211    .text.EXTI5_9_IRQHandler:00000000000000c6 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:214    .text.EXTI5_9_IRQHandler:00000000000000c8 .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:216    .text.EXTI5_9_IRQHandler:00000000000000ca .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:225    .sbss.sensorTriggered:0000000000000000 sensorTriggered
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:222    .sbss.sensorTriggered:0000000000000000 .LANCHOR0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:93     .text.initSensorInterrupt:000000000000009a .L0 
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:220    .text.EXTI5_9_IRQHandler:00000000000000ca .L0 
                      .debug_frame:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:152    .text.EXTI5_9_IRQHandler:0000000000000064 .L4
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:180    .text.EXTI5_9_IRQHandler:000000000000008c .L5
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:195    .text.EXTI5_9_IRQHandler:00000000000000a8 .L6
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:147    .text.EXTI5_9_IRQHandler:0000000000000058 .L7
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:208    .text.EXTI5_9_IRQHandler:00000000000000c4 .L3
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:139    .text.EXTI5_9_IRQHandler:000000000000004a .L17
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1118   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1703   .debug_str:0000000000000526 .LASF159
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1607   .debug_str:00000000000002c7 .LASF160
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1551   .debug_str:0000000000000153 .LASF161
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1477   .debug_ranges:0000000000000000 .Ldebug_ranges0
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1485   .debug_line:0000000000000000 .Ldebug_line0
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1697   .debug_str:0000000000000501 .LASF162
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1699   .debug_str:0000000000000506 .LASF0
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1717   .debug_str:00000000000005f5 .LASF1
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1667   .debug_str:0000000000000433 .LASF2
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1725   .debug_str:0000000000000624 .LASF3
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1679   .debug_str:0000000000000478 .LASF4
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1797   .debug_str:000000000000080d .LASF5
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1541   .debug_str:0000000000000121 .LASF6
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1809   .debug_str:000000000000086d .LASF7
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1707   .debug_str:00000000000005b9 .LASF8
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1587   .debug_str:0000000000000259 .LASF9
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1665   .debug_str:0000000000000426 .LASF10
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1529   .debug_str:00000000000000e2 .LASF11
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1735   .debug_str:000000000000065c .LASF12
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1601   .debug_str:00000000000002a3 .LASF13
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1795   .debug_str:0000000000000802 .LASF14
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1671   .debug_str:000000000000044c .LASF15
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1789   .debug_str:00000000000007cb .LASF16
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 9
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:152    .text.EXTI5_9_IRQHandler:0000000000000064 .L4
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:180    .text.EXTI5_9_IRQHandler:000000000000008c .L5
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:195    .text.EXTI5_9_IRQHandler:00000000000000a8 .L6
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:147    .text.EXTI5_9_IRQHandler:0000000000000058 .L7
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:208    .text.EXTI5_9_IRQHandler:00000000000000c4 .L3
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:139    .text.EXTI5_9_IRQHandler:000000000000004a .L17
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1118   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1703   .debug_str:0000000000000526 .LASF159
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1607   .debug_str:00000000000002c7 .LASF160
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1551   .debug_str:0000000000000153 .LASF161
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1477   .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1485   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1697   .debug_str:0000000000000501 .LASF162
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1699   .debug_str:0000000000000506 .LASF0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1717   .debug_str:00000000000005f5 .LASF1
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1667   .debug_str:0000000000000433 .LASF2
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1725   .debug_str:0000000000000624 .LASF3
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1679   .debug_str:0000000000000478 .LASF4
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1797   .debug_str:000000000000080d .LASF5
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1541   .debug_str:0000000000000121 .LASF6
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1809   .debug_str:000000000000086d .LASF7
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1707   .debug_str:00000000000005b9 .LASF8
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1587   .debug_str:0000000000000259 .LASF9
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1665   .debug_str:0000000000000426 .LASF10
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1529   .debug_str:00000000000000e2 .LASF11
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1735   .debug_str:000000000000065c .LASF12
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1601   .debug_str:00000000000002a3 .LASF13
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1795   .debug_str:0000000000000802 .LASF14
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1671   .debug_str:000000000000044c .LASF15
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1789   .debug_str:00000000000007cb .LASF16
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 9
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1621   .debug_str:0000000000000319 .LASF17
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1525   .debug_str:00000000000000c3 .LASF18
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1723   .debug_str:0000000000000611 .LASF19
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1559   .debug_str:00000000000001df .LASF20
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1783   .debug_str:00000000000007a2 .LASF21
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1663   .debug_str:0000000000000413 .LASF22
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1521   .debug_str:00000000000000aa .LASF23
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1591   .debug_str:000000000000026e .LASF24
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1605   .debug_str:00000000000002b9 .LASF25
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1513   .debug_str:0000000000000077 .LASF26
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1751   .debug_str:00000000000006d3 .LASF27
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1743   .debug_str:000000000000069a .LASF28
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1773   .debug_str:000000000000076b .LASF29
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1681   .debug_str:0000000000000487 .LASF30
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1801   .debug_str:0000000000000821 .LASF31
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1509   .debug_str:0000000000000058 .LASF32
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1527   .debug_str:00000000000000d6 .LASF33
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1727   .debug_str:0000000000000632 .LASF34
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1599   .debug_str:0000000000000297 .LASF35
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1757   .debug_str:00000000000006fe .LASF36
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1637   .debug_str:0000000000000373 .LASF37
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1689   .debug_str:00000000000004cb .LASF38
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1737   .debug_str:0000000000000667 .LASF39
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1683   .debug_str:0000000000000496 .LASF40
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1549   .debug_str:0000000000000149 .LASF41
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1537   .debug_str:000000000000010a .LASF42
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1715   .debug_str:00000000000005e9 .LASF43
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1589   .debug_str:0000000000000262 .LASF44
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1709   .debug_str:00000000000005c2 .LASF45
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1711   .debug_str:00000000000005d1 .LASF46
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1747   .debug_str:00000000000006ba .LASF47
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1547   .debug_str:000000000000013f .LASF48
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1787   .debug_str:00000000000007bf .LASF49
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1769   .debug_str:0000000000000747 .LASF50
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1661   .debug_str:0000000000000408 .LASF51
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1539   .debug_str:0000000000000116 .LASF52
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1669   .debug_str:0000000000000440 .LASF53
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1543   .debug_str:000000000000012a .LASF54
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1745   .debug_str:00000000000006a7 .LASF55
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1617   .debug_str:00000000000002f7 .LASF56
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1519   .debug_str:0000000000000097 .LASF57
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1685   .debug_str:00000000000004a0 .LASF58
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1553   .debug_str:000000000000019d .LASF59
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1691   .debug_str:00000000000004d8 .LASF60
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1701   .debug_str:0000000000000518 .LASF61
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1585   .debug_str:000000000000024b .LASF62
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1673   .debug_str:0000000000000457 .LASF63
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1629   .debug_str:0000000000000347 .LASF64
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1755   .debug_str:00000000000006e9 .LASF65
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1523   .debug_str:00000000000000b6 .LASF66
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1627   .debug_str:000000000000033b .LASF67
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1779   .debug_str:000000000000078d .LASF72
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1763   .debug_str:0000000000000726 .LASF68
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1533   .debug_str:00000000000000f6 .LASF69
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1793   .debug_str:00000000000007ef .LASF70
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1713   .debug_str:00000000000005e0 .LASF71
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1767   .debug_str:000000000000073c .LASF73
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 10
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1621   .debug_str:0000000000000319 .LASF17
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1525   .debug_str:00000000000000c3 .LASF18
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1723   .debug_str:0000000000000611 .LASF19
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1559   .debug_str:00000000000001df .LASF20
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1783   .debug_str:00000000000007a2 .LASF21
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1663   .debug_str:0000000000000413 .LASF22
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1521   .debug_str:00000000000000aa .LASF23
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1591   .debug_str:000000000000026e .LASF24
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1605   .debug_str:00000000000002b9 .LASF25
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1513   .debug_str:0000000000000077 .LASF26
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1751   .debug_str:00000000000006d3 .LASF27
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1743   .debug_str:000000000000069a .LASF28
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1773   .debug_str:000000000000076b .LASF29
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1681   .debug_str:0000000000000487 .LASF30
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1801   .debug_str:0000000000000821 .LASF31
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1509   .debug_str:0000000000000058 .LASF32
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1527   .debug_str:00000000000000d6 .LASF33
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1727   .debug_str:0000000000000632 .LASF34
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1599   .debug_str:0000000000000297 .LASF35
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1757   .debug_str:00000000000006fe .LASF36
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1637   .debug_str:0000000000000373 .LASF37
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1689   .debug_str:00000000000004cb .LASF38
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1737   .debug_str:0000000000000667 .LASF39
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1683   .debug_str:0000000000000496 .LASF40
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1549   .debug_str:0000000000000149 .LASF41
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1537   .debug_str:000000000000010a .LASF42
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1715   .debug_str:00000000000005e9 .LASF43
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1589   .debug_str:0000000000000262 .LASF44
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1709   .debug_str:00000000000005c2 .LASF45
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1711   .debug_str:00000000000005d1 .LASF46
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1747   .debug_str:00000000000006ba .LASF47
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1547   .debug_str:000000000000013f .LASF48
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1787   .debug_str:00000000000007bf .LASF49
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1769   .debug_str:0000000000000747 .LASF50
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1661   .debug_str:0000000000000408 .LASF51
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1539   .debug_str:0000000000000116 .LASF52
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1669   .debug_str:0000000000000440 .LASF53
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1543   .debug_str:000000000000012a .LASF54
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1745   .debug_str:00000000000006a7 .LASF55
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1617   .debug_str:00000000000002f7 .LASF56
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1519   .debug_str:0000000000000097 .LASF57
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1685   .debug_str:00000000000004a0 .LASF58
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1553   .debug_str:000000000000019d .LASF59
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1691   .debug_str:00000000000004d8 .LASF60
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1701   .debug_str:0000000000000518 .LASF61
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1585   .debug_str:000000000000024b .LASF62
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1673   .debug_str:0000000000000457 .LASF63
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1629   .debug_str:0000000000000347 .LASF64
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1755   .debug_str:00000000000006e9 .LASF65
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1523   .debug_str:00000000000000b6 .LASF66
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1627   .debug_str:000000000000033b .LASF67
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1779   .debug_str:000000000000078d .LASF72
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1763   .debug_str:0000000000000726 .LASF68
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1533   .debug_str:00000000000000f6 .LASF69
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1793   .debug_str:00000000000007ef .LASF70
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1713   .debug_str:00000000000005e0 .LASF71
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1767   .debug_str:000000000000073c .LASF73
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 10
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1741   .debug_str:0000000000000688 .LASF74
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1649   .debug_str:00000000000003c0 .LASF75
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1555   .debug_str:00000000000001b0 .LASF76
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1625   .debug_str:0000000000000333 .LASF77
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1545   .debug_str:0000000000000136 .LASF78
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1695   .debug_str:00000000000004f1 .LASF143
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1721   .debug_str:000000000000060b .LASF79
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1563   .debug_str:00000000000001fd .LASF80
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1565   .debug_str:0000000000000204 .LASF81
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1567   .debug_str:000000000000020b .LASF82
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1569   .debug_str:0000000000000212 .LASF83
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1571   .debug_str:0000000000000219 .LASF84
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1573   .debug_str:0000000000000220 .LASF85
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1575   .debug_str:0000000000000227 .LASF86
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1577   .debug_str:000000000000022e .LASF87
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1579   .debug_str:0000000000000235 .LASF88
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1581   .debug_str:000000000000023c .LASF89
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1487   .debug_str:0000000000000000 .LASF90
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1489   .debug_str:0000000000000008 .LASF91
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1491   .debug_str:0000000000000010 .LASF92
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1493   .debug_str:0000000000000018 .LASF93
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1495   .debug_str:0000000000000020 .LASF94
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1497   .debug_str:0000000000000028 .LASF95
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1499   .debug_str:0000000000000030 .LASF96
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1501   .debug_str:0000000000000038 .LASF97
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1503   .debug_str:0000000000000040 .LASF98
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1647   .debug_str:00000000000003b1 .LASF99
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1759   .debug_str:000000000000070b .LASF100
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1791   .debug_str:00000000000007de .LASF101
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1657   .debug_str:00000000000003ec .LASF102
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1619   .debug_str:000000000000030a .LASF103
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1803   .debug_str:0000000000000835 .LASF104
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1515   .debug_str:0000000000000085 .LASF105
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1517   .debug_str:000000000000008e .LASF106
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1811   .debug_str:0000000000000879 .LASF107
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1749   .debug_str:00000000000006ca .LASF108
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1785   .debug_str:00000000000007b5 .LASF109
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1631   .debug_str:0000000000000352 .LASF110
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1633   .debug_str:000000000000035d .LASF111
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1635   .debug_str:0000000000000368 .LASF112
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1511   .debug_str:000000000000006c .LASF113
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1639   .debug_str:0000000000000380 .LASF114
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1641   .debug_str:000000000000038b .LASF115
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1597   .debug_str:000000000000028d .LASF116
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1613   .debug_str:00000000000002e5 .LASF117
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1615   .debug_str:00000000000002ee .LASF118
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1705   .debug_str:00000000000005ae .LASF119
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1781   .debug_str:0000000000000797 .LASF120
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1731   .debug_str:0000000000000648 .LASF121
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1733   .debug_str:0000000000000652 .LASF122
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1593   .debug_str:000000000000027b .LASF123
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1595   .debug_str:0000000000000284 .LASF124
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1675   .debug_str:0000000000000466 .LASF125
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1677   .debug_str:000000000000046f .LASF126
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1531   .debug_str:00000000000000ed .LASF127
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1765   .debug_str:0000000000000734 .LASF128
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1583   .debug_str:0000000000000243 .LASF129
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 11
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1741   .debug_str:0000000000000688 .LASF74
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1649   .debug_str:00000000000003c0 .LASF75
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1555   .debug_str:00000000000001b0 .LASF76
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1625   .debug_str:0000000000000333 .LASF77
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1545   .debug_str:0000000000000136 .LASF78
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1695   .debug_str:00000000000004f1 .LASF143
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1721   .debug_str:000000000000060b .LASF79
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1563   .debug_str:00000000000001fd .LASF80
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1565   .debug_str:0000000000000204 .LASF81
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1567   .debug_str:000000000000020b .LASF82
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1569   .debug_str:0000000000000212 .LASF83
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1571   .debug_str:0000000000000219 .LASF84
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1573   .debug_str:0000000000000220 .LASF85
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1575   .debug_str:0000000000000227 .LASF86
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1577   .debug_str:000000000000022e .LASF87
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1579   .debug_str:0000000000000235 .LASF88
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1581   .debug_str:000000000000023c .LASF89
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1487   .debug_str:0000000000000000 .LASF90
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1489   .debug_str:0000000000000008 .LASF91
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1491   .debug_str:0000000000000010 .LASF92
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1493   .debug_str:0000000000000018 .LASF93
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1495   .debug_str:0000000000000020 .LASF94
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1497   .debug_str:0000000000000028 .LASF95
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1499   .debug_str:0000000000000030 .LASF96
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1501   .debug_str:0000000000000038 .LASF97
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1503   .debug_str:0000000000000040 .LASF98
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1647   .debug_str:00000000000003b1 .LASF99
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1759   .debug_str:000000000000070b .LASF100
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1791   .debug_str:00000000000007de .LASF101
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1657   .debug_str:00000000000003ec .LASF102
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1619   .debug_str:000000000000030a .LASF103
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1803   .debug_str:0000000000000835 .LASF104
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1515   .debug_str:0000000000000085 .LASF105
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1517   .debug_str:000000000000008e .LASF106
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1811   .debug_str:0000000000000879 .LASF107
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1749   .debug_str:00000000000006ca .LASF108
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1785   .debug_str:00000000000007b5 .LASF109
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1631   .debug_str:0000000000000352 .LASF110
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1633   .debug_str:000000000000035d .LASF111
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1635   .debug_str:0000000000000368 .LASF112
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1511   .debug_str:000000000000006c .LASF113
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1639   .debug_str:0000000000000380 .LASF114
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1641   .debug_str:000000000000038b .LASF115
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1597   .debug_str:000000000000028d .LASF116
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1613   .debug_str:00000000000002e5 .LASF117
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1615   .debug_str:00000000000002ee .LASF118
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1705   .debug_str:00000000000005ae .LASF119
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1781   .debug_str:0000000000000797 .LASF120
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1731   .debug_str:0000000000000648 .LASF121
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1733   .debug_str:0000000000000652 .LASF122
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1593   .debug_str:000000000000027b .LASF123
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1595   .debug_str:0000000000000284 .LASF124
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1675   .debug_str:0000000000000466 .LASF125
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1677   .debug_str:000000000000046f .LASF126
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1531   .debug_str:00000000000000ed .LASF127
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1765   .debug_str:0000000000000734 .LASF128
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1583   .debug_str:0000000000000243 .LASF129
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 11
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1643   .debug_str:0000000000000396 .LASF130
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1753   .debug_str:00000000000006e2 .LASF131
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1651   .debug_str:00000000000003ce .LASF132
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1653   .debug_str:00000000000003d8 .LASF133
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1655   .debug_str:00000000000003e2 .LASF134
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1505   .debug_str:0000000000000048 .LASF135
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1659   .debug_str:00000000000003fe .LASF136
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1775   .debug_str:000000000000077b .LASF137
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1777   .debug_str:0000000000000784 .LASF138
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1561   .debug_str:00000000000001f2 .LASF139
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1611   .debug_str:00000000000002dc .LASF140
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1603   .debug_str:00000000000002ae .LASF141
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1693   .debug_str:00000000000004e5 .LASF142
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1761   .debug_str:0000000000000716 .LASF144
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1799   .debug_str:0000000000000818 .LASF145
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1719   .debug_str:0000000000000602 .LASF146
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1623   .debug_str:000000000000032c .LASF147
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1609   .debug_str:00000000000002d0 .LASF148
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1507   .debug_str:0000000000000052 .LASF149
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1645   .debug_str:000000000000039e .LASF150
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:98     .text.EXTI5_9_IRQHandler:0000000000000000 .LFB3
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:217    .text.EXTI5_9_IRQHandler:00000000000000ca .LFE3
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1416   .debug_loc:0000000000000000 .LLST1
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:113    .text.EXTI5_9_IRQHandler:0000000000000010 .LVL10
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:151    .text.EXTI5_9_IRQHandler:0000000000000064 .LVL11
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:157    .text.EXTI5_9_IRQHandler:0000000000000070 .LVL12
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:179    .text.EXTI5_9_IRQHandler:000000000000008c .LVL13
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1739   .debug_str:0000000000000674 .LASF151
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:14     .text.initSensorInterrupt:0000000000000000 .LFB2
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:91     .text.initSensorInterrupt:000000000000009a .LFE2
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1444   .debug_loc:0000000000000044 .LLST0
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:30     .text.initSensorInterrupt:0000000000000010 .LVL0
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:34     .text.initSensorInterrupt:000000000000001c .LVL1
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:42     .text.initSensorInterrupt:0000000000000036 .LVL2
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:47     .text.initSensorInterrupt:0000000000000042 .LVL3
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:52     .text.initSensorInterrupt:000000000000004e .LVL4
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:58     .text.initSensorInterrupt:000000000000005e .LVL5
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:64     .text.initSensorInterrupt:000000000000006e .LVL6
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:68     .text.initSensorInterrupt:000000000000007a .LVL7
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:72     .text.initSensorInterrupt:0000000000000086 .LVL8
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:89     .text.initSensorInterrupt:000000000000009a .LVL9
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1557   .debug_str:00000000000001c7 .LASF152
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1771   .debug_str:0000000000000751 .LASF153
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1807   .debug_str:0000000000000855 .LASF154
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1535   .debug_str:0000000000000100 .LASF155
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1687   .debug_str:00000000000004b3 .LASF156
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1729   .debug_str:000000000000063e .LASF157
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:1805   .debug_str:0000000000000844 .LASF158
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:104    .text.EXTI5_9_IRQHandler:0000000000000002 .LCFI2
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:175    .text.EXTI5_9_IRQHandler:0000000000000084 .LCFI3
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:181    .text.EXTI5_9_IRQHandler:000000000000008c .LCFI4
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:213    .text.EXTI5_9_IRQHandler:00000000000000c8 .LCFI5
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:21     .text.initSensorInterrupt:0000000000000002 .LCFI0
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:85     .text.initSensorInterrupt:0000000000000092 .LCFI1
-C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s:238    .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1643   .debug_str:0000000000000396 .LASF130
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1753   .debug_str:00000000000006e2 .LASF131
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1651   .debug_str:00000000000003ce .LASF132
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1653   .debug_str:00000000000003d8 .LASF133
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1655   .debug_str:00000000000003e2 .LASF134
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1505   .debug_str:0000000000000048 .LASF135
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1659   .debug_str:00000000000003fe .LASF136
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1775   .debug_str:000000000000077b .LASF137
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1777   .debug_str:0000000000000784 .LASF138
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1561   .debug_str:00000000000001f2 .LASF139
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1611   .debug_str:00000000000002dc .LASF140
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1603   .debug_str:00000000000002ae .LASF141
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1693   .debug_str:00000000000004e5 .LASF142
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1761   .debug_str:0000000000000716 .LASF144
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1799   .debug_str:0000000000000818 .LASF145
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1719   .debug_str:0000000000000602 .LASF146
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1623   .debug_str:000000000000032c .LASF147
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1609   .debug_str:00000000000002d0 .LASF148
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1507   .debug_str:0000000000000052 .LASF149
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1645   .debug_str:000000000000039e .LASF150
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:98     .text.EXTI5_9_IRQHandler:0000000000000000 .LFB3
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:217    .text.EXTI5_9_IRQHandler:00000000000000ca .LFE3
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1416   .debug_loc:0000000000000000 .LLST1
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:113    .text.EXTI5_9_IRQHandler:0000000000000010 .LVL10
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:151    .text.EXTI5_9_IRQHandler:0000000000000064 .LVL11
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:157    .text.EXTI5_9_IRQHandler:0000000000000070 .LVL12
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:179    .text.EXTI5_9_IRQHandler:000000000000008c .LVL13
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1739   .debug_str:0000000000000674 .LASF151
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:14     .text.initSensorInterrupt:0000000000000000 .LFB2
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:91     .text.initSensorInterrupt:000000000000009a .LFE2
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1444   .debug_loc:0000000000000044 .LLST0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:30     .text.initSensorInterrupt:0000000000000010 .LVL0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:34     .text.initSensorInterrupt:000000000000001c .LVL1
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:42     .text.initSensorInterrupt:0000000000000036 .LVL2
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:47     .text.initSensorInterrupt:0000000000000042 .LVL3
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:52     .text.initSensorInterrupt:000000000000004e .LVL4
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:58     .text.initSensorInterrupt:000000000000005e .LVL5
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:64     .text.initSensorInterrupt:000000000000006e .LVL6
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:68     .text.initSensorInterrupt:000000000000007a .LVL7
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:72     .text.initSensorInterrupt:0000000000000086 .LVL8
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:89     .text.initSensorInterrupt:000000000000009a .LVL9
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1557   .debug_str:00000000000001c7 .LASF152
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1771   .debug_str:0000000000000751 .LASF153
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1807   .debug_str:0000000000000855 .LASF154
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1535   .debug_str:0000000000000100 .LASF155
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1687   .debug_str:00000000000004b3 .LASF156
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1729   .debug_str:000000000000063e .LASF157
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:1805   .debug_str:0000000000000844 .LASF158
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:104    .text.EXTI5_9_IRQHandler:0000000000000002 .LCFI2
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:175    .text.EXTI5_9_IRQHandler:0000000000000084 .LCFI3
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:181    .text.EXTI5_9_IRQHandler:000000000000008c .LCFI4
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:213    .text.EXTI5_9_IRQHandler:00000000000000c8 .LCFI5
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:21     .text.initSensorInterrupt:0000000000000002 .LCFI0
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:85     .text.initSensorInterrupt:0000000000000092 .LCFI1
+C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s:238    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccZv3Ck8.s 			page 12
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\cc5aIT4z.s 			page 12
 
 
 rcu_periph_clock_enable

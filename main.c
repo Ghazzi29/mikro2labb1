@@ -1,66 +1,68 @@
 #include "gd32vf103.h"
 #include "stepper.h"
 #include "sensor.h"
-#include "drivers.h"
 
 #define CW 1
 #define CCW 0
 
-int main(){
+// 0 går till max, 1 till min, 2 till mid, 3 sover
 
-	volatile int max_temp = 7;
-	volatile int min_temp = 0;
-	volatile int middle = (max_temp + min_temp)/2;
-	volatile int currentTemp = 4;
-	volatile int phase = 0; 
+volatile int max_temp = 7;
+volatile int min_temp = 0;
+volatile int middle = 3;
+volatile int currentTemp = 4;
+volatile int phase = 0;
 
-	// 0 går till max, 1 till min 2 till mid, 3 sover
+int main() {
 
-	rcu_periph_clock_enable(RCU_GPIOB);
-	initStep();
+    rcu_periph_clock_enable(RCU_GPIOB);
 
-	l88init();
-	
-	//interrups
-	initSensorInterrupt();
-	eclic_global_interrupt_enable();
-	
-	while(1){
-		switch(phase){
-			case 0:
-				execStep(CW);
-				currentTemp++;
-				break;
+    // Initialize PB0 LED
+    gpio_init(GPIOB, GPIO_MODE_OUT_PP,
+              GPIO_OSPEED_50MHZ, GPIO_PIN_0);
 
-			case 1:
-				execStep(CCW);
-				currentTemp--;
-				break;
-			
-			case 2:
-				execStep(CW);
-				currentTemp++;
-				if (currentTemp==middle){
-					phase = 3;
-				}
-				break;
+    gpio_bit_reset(GPIOB, GPIO_PIN_0);
 
-			case 3:
-				//sleep
-				break;	
-		}
- 		uint8_t pattern = tempToPattern(currentTemp);
-		colinit();
-		l88mem(0,pattern);
+    initStep();
 
-		for (volatile int i = 0; i < 100000; i++){}
-	}
-}
+    // Interrupts
+    initSensorInterrupt();
+    eclic_global_interrupt_enable();
 
-uint8_t tempToPattern(int currentTemp) {
+    int previousTemp = currentTemp;
 
-    if (currentTemp < 0) currentTemp = 0;
-    if (currentTemp > 7) currentTemp = 7;
+    while (1) {
 
-    return (1U << currentTemp) - 1U;
+        // TEST: Toggle PB0 when temperature changes
+        if (currentTemp != previousTemp) {
+
+            if (gpio_output_bit_get(GPIOB, GPIO_PIN_0)) {
+                gpio_bit_reset(GPIOB, GPIO_PIN_0);
+            } else {
+                gpio_bit_set(GPIOB, GPIO_PIN_0);
+            }
+
+            previousTemp = currentTemp;
+        }
+
+        switch (phase) {
+            case 0:
+                execStep(CW);
+                break;
+
+            case 1:
+                execStep(CCW);
+                break;
+
+            case 2:
+                execStep(CW);
+                break;
+
+            case 3:
+                // sleep
+                break;
+        }
+
+        for (volatile int i = 0; i < 100000; i++) {}
+    }
 }
