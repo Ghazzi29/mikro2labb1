@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 1
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 1
 
 
    1              		.file	"main.c"
@@ -9,505 +9,751 @@ GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 1
    6              		.text
    7              	.Ltext0:
    8              		.cfi_sections	.debug_frame
-   9              		.section	.text.startup.main,"ax",@progbits
+   9              		.section	.text.initDisplay,"ax",@progbits
   10              		.align	1
-  11              		.globl	main
-  13              	main:
+  11              		.globl	initDisplay
+  13              	initDisplay:
   14              	.LFB2:
   15              		.file 1 "main.c"
-   1:main.c        **** #include "gd32vf103.h"
-   2:main.c        **** #include "stepper.h"
-   3:main.c        **** #include "sensor.h"
-   4:main.c        **** 
-   5:main.c        **** #define CW 1
-   6:main.c        **** #define CCW 0
-   7:main.c        **** 
-   8:main.c        **** // 0 går till max, 1 till min, 2 till mid, 3 sover
+   1:main.c        **** 
+   2:main.c        **** #include "gd32vf103.h"
+   3:main.c        **** #include "stepper.h"
+   4:main.c        **** #include "sensor.h"
+   5:main.c        **** #include "drivers.h"
+   6:main.c        **** 
+   7:main.c        **** #define CW 1
+   8:main.c        **** #define CCW 0
    9:main.c        **** 
-  10:main.c        **** volatile int max_temp = 7;
-  11:main.c        **** volatile int min_temp = 0;
-  12:main.c        **** volatile int middle = 3;
-  13:main.c        **** volatile int currentTemp = 4;
-  14:main.c        **** volatile int phase = 0;
-  15:main.c        **** 
-  16:main.c        **** int main() {
-  16              		.loc 1 16 12
-  17              		.cfi_startproc
+  10:main.c        **** // 0 = max, 1 = min, 2 = middle, 3 = stop
+  11:main.c        **** 
+  12:main.c        **** volatile int max_temp = 4;
+  13:main.c        **** volatile int min_temp = 0;
+  14:main.c        **** volatile int middle = 2;
+  15:main.c        **** volatile int currentTemp = 1;
+  16:main.c        **** volatile int phase = 0;
   17:main.c        **** 
-  18:main.c        ****     rcu_periph_clock_enable(RCU_GPIOB);
-  18              		.loc 1 18 5
-  16:main.c        **** 
-  19              		.loc 1 16 12 is_stmt 0
-  20 0000 7971     		addi	sp,sp,-48
-  21              	.LCFI0:
-  22              		.cfi_def_cfa_offset 48
-  23              		.loc 1 18 5
-  24 0002 13053060 		li	a0,1539
-  16:main.c        **** 
-  25              		.loc 1 16 12
-  26 0006 06D6     		sw	ra,44(sp)
-  27 0008 22D4     		sw	s0,40(sp)
-  28 000a 26D2     		sw	s1,36(sp)
-  29              		.cfi_offset 1, -4
-  30              		.cfi_offset 8, -8
-  31              		.cfi_offset 9, -12
+  18:main.c        **** static int activeCol = 3;
   19:main.c        **** 
-  20:main.c        ****     // Initialize PB0 LED
-  21:main.c        ****     gpio_init(GPIOB, GPIO_MODE_OUT_PP,
-  32              		.loc 1 21 5
-  33 000c 37140140 		li	s0,1073811456
-  16:main.c        **** 
-  34              		.loc 1 16 12
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 2
-
-
-  35 0010 4AD0     		sw	s2,32(sp)
-  36 0012 4ECE     		sw	s3,28(sp)
-  37 0014 52CC     		sw	s4,24(sp)
-  38 0016 56CA     		sw	s5,20(sp)
-  39              		.cfi_offset 18, -16
-  40              		.cfi_offset 19, -20
-  41              		.cfi_offset 20, -24
-  42              		.cfi_offset 21, -28
-  18:main.c        **** 
-  43              		.loc 1 18 5
-  44 0018 97000000 		call	rcu_periph_clock_enable
-  44      E7800000 
-  45              	.LVL0:
-  46              		.loc 1 21 5 is_stmt 1
-  47 0020 8546     		li	a3,1
-  48 0022 0D46     		li	a2,3
-  49 0024 130504C0 		addi	a0,s0,-1024
-  50 0028 C145     		li	a1,16
-  51 002a 97000000 		call	gpio_init
-  51      E7800000 
-  52              	.LVL1:
-  22:main.c        ****               GPIO_OSPEED_50MHZ, GPIO_PIN_0);
+  20:main.c        **** 
+  21:main.c        **** // Initialize one fixed column
+  22:main.c        **** void initDisplay(void) {
+  16              		.loc 1 22 24
+  17              		.cfi_startproc
   23:main.c        **** 
-  24:main.c        ****     gpio_bit_reset(GPIOB, GPIO_PIN_0);
-  53              		.loc 1 24 5
-  54 0032 130504C0 		addi	a0,s0,-1024
-  55 0036 8545     		li	a1,1
-  56 0038 97000000 		call	gpio_bit_reset
-  56      E7800000 
-  57              	.LVL2:
-  25:main.c        **** 
-  26:main.c        ****     initStep();
-  58              		.loc 1 26 5
-  27:main.c        **** 
-  28:main.c        ****     // Interrupts
-  29:main.c        ****     initSensorInterrupt();
-  30:main.c        ****     eclic_global_interrupt_enable();
-  31:main.c        **** 
-  32:main.c        ****     int previousTemp = currentTemp;
-  59              		.loc 1 32 9 is_stmt 0
-  60 0040 37090000 		lui	s2,%hi(.LANCHOR0)
+  24:main.c        ****     colinit();
+  18              		.loc 1 24 5
+  22:main.c        **** 
+  19              		.loc 1 22 24 is_stmt 0
+  20 0000 4111     		addi	sp,sp,-16
+  21              	.LCFI0:
+  22              		.cfi_def_cfa_offset 16
+  23 0002 06C6     		sw	ra,12(sp)
+  24 0004 22C4     		sw	s0,8(sp)
+  25 0006 4AC0     		sw	s2,0(sp)
+  26 0008 26C2     		sw	s1,4(sp)
+  27              		.cfi_offset 1, -4
+  28              		.cfi_offset 8, -8
+  29              		.cfi_offset 18, -16
+  30              		.cfi_offset 9, -12
+  25:main.c        ****     l88init();
+  31              		.loc 1 25 5
+  32 000a 1144     		li	s0,4
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 2
+
+
+  24:main.c        ****     l88init();
+  33              		.loc 1 24 5
+  34 000c 97000000 		call	colinit
+  34      E7800000 
+  35              	.LVL0:
+  36              		.loc 1 25 5 is_stmt 1
+  37              	.LBB2:
   26:main.c        **** 
-  61              		.loc 1 26 5
-  62 0044 97000000 		call	initStep
-  62      E7800000 
-  63              	.LVL3:
-  29:main.c        ****     eclic_global_interrupt_enable();
-  64              		.loc 1 29 5 is_stmt 1
-  65 004c 97000000 		call	initSensorInterrupt
-  65      E7800000 
-  66              	.LVL4:
-  30:main.c        **** 
-  67              		.loc 1 30 5
-  68 0054 97000000 		call	eclic_global_interrupt_enable
-  68      E7800000 
-  69              	.LVL5:
-  70              		.loc 1 32 5
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 3
+  27:main.c        ****     // colset() starts at 7 and counts down.
+  28:main.c        ****     // Four calls select column 3.
+  29:main.c        ****     for (int i = 0; i < 4; i++) {
+  30:main.c        ****         activeCol = colset();
+  38              		.loc 1 30 19 is_stmt 0
+  39 0014 37090000 		lui	s2,%hi(.LANCHOR0)
+  40              	.LBE2:
+  25:main.c        **** 
+  41              		.loc 1 25 5
+  42 0018 97000000 		call	l88init
+  42      E7800000 
+  43              	.LVL1:
+  29:main.c        ****         activeCol = colset();
+  44              		.loc 1 29 5 is_stmt 1
+  45              	.LBB3:
+  29:main.c        ****         activeCol = colset();
+  46              		.loc 1 29 10
+  47              	.L2:
+  48              		.loc 1 30 9 discriminator 3
+  49              		.loc 1 30 21 is_stmt 0 discriminator 3
+  50 0020 97000000 		call	colset
+  50      E7800000 
+  51              	.LVL2:
+  52              		.loc 1 30 19 discriminator 3
+  53 0028 93040900 		addi	s1,s2,%lo(.LANCHOR0)
+  54 002c 88C0     		sw	a0,0(s1)
+  55              	.LVL3:
+  56 002e 7D14     		addi	s0,s0,-1
+  57              	.LVL4:
+  29:main.c        ****         activeCol = colset();
+  58              		.loc 1 29 5 discriminator 3
+  59 0030 65F8     		bne	s0,zero,.L2
+  60              	.LBE3:
+  31:main.c        ****     }
+  32:main.c        **** 
+  33:main.c        ****     // Start with all LEDs off in this column
+  34:main.c        ****     l88mem(activeCol, 0x00);
+  61              		.loc 1 34 5 is_stmt 1
+  62 0032 8145     		li	a1,0
+  63 0034 97000000 		call	l88mem
+  63      E7800000 
+  64              	.LVL5:
+  35:main.c        ****     l88row(activeCol);
+  65              		.loc 1 35 5
+  36:main.c        **** }
+  66              		.loc 1 36 1 is_stmt 0
+  67 003c 2244     		lw	s0,8(sp)
+  68              		.cfi_restore 8
+  69              	.LVL6:
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 3
 
 
-  71              		.loc 1 32 9 is_stmt 0
-  72 005c 93070900 		addi	a5,s2,%lo(.LANCHOR0)
-  73 0060 83A90700 		lw	s3,0(a5)
-  74              	.LVL6:
-  75              	.LBB2:
-  33:main.c        **** 
-  34:main.c        ****     while (1) {
-  35:main.c        **** 
-  36:main.c        ****         // TEST: Toggle PB0 when temperature changes
-  37:main.c        ****         if (currentTemp != previousTemp) {
+  35:main.c        ****     l88row(activeCol);
+  70              		.loc 1 35 5
+  71 003e 8840     		lw	a0,0(s1)
+  72              		.loc 1 36 1
+  73 0040 B240     		lw	ra,12(sp)
+  74              		.cfi_restore 1
+  75 0042 9244     		lw	s1,4(sp)
+  76              		.cfi_restore 9
+  77 0044 0249     		lw	s2,0(sp)
+  78              		.cfi_restore 18
+  79 0046 4101     		addi	sp,sp,16
+  80              	.LCFI1:
+  81              		.cfi_def_cfa_offset 0
+  35:main.c        ****     l88row(activeCol);
+  82              		.loc 1 35 5
+  83 0048 17030000 		tail	l88row
+  83      67000300 
+  84              	.LVL7:
+  85              		.cfi_endproc
+  86              	.LFE2:
+  88              		.section	.text.displayTemp,"ax",@progbits
+  89              		.align	1
+  90              		.globl	displayTemp
+  92              	displayTemp:
+  93              	.LFB3:
+  37:main.c        **** 
   38:main.c        **** 
-  39:main.c        ****             if (gpio_output_bit_get(GPIOB, GPIO_PIN_0)) {
-  40:main.c        ****                 gpio_bit_reset(GPIOB, GPIO_PIN_0);
-  41:main.c        ****             } else {
-  42:main.c        ****                 gpio_bit_set(GPIOB, GPIO_PIN_0);
-  43:main.c        ****             }
+  39:main.c        **** // Display temperature using 0-8 LEDs
+  40:main.c        **** void displayTemp(int temp) {
+  94              		.loc 1 40 28 is_stmt 1
+  95              		.cfi_startproc
+  96              	.LVL8:
+  41:main.c        **** 
+  42:main.c        ****     if (temp < 0) temp = 0;
+  97              		.loc 1 42 5
+  40:main.c        **** 
+  98              		.loc 1 40 28 is_stmt 0
+  99 0000 4111     		addi	sp,sp,-16
+ 100              	.LCFI2:
+ 101              		.cfi_def_cfa_offset 16
+ 102 0002 06C6     		sw	ra,12(sp)
+ 103 0004 22C4     		sw	s0,8(sp)
+ 104              		.cfi_offset 1, -4
+ 105              		.cfi_offset 8, -8
+ 106 0006 A147     		li	a5,8
+ 107 0008 63D8A702 		ble	a0,a5,.L6
+ 108 000c 2145     		li	a0,8
+ 109              	.LVL9:
+ 110              	.L7:
+  43:main.c        ****     if (temp > 8) temp = 8;
   44:main.c        **** 
-  45:main.c        ****             previousTemp = currentTemp;
-  46:main.c        ****         }
+  45:main.c        ****     // Convert temperature to LED bitmask
+  46:main.c        ****     int pattern = (1 << temp) - 1;
   47:main.c        **** 
-  48:main.c        ****         switch (phase) {
-  49:main.c        ****             case 0:
-  50:main.c        ****                 execStep(CW);
-  51:main.c        ****                 break;
+  48:main.c        ****     // Update only the selected column
+  49:main.c        ****     l88mem(activeCol, pattern);
+ 111              		.loc 1 49 5
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 4
+
+
+ 112 000e 37040000 		lui	s0,%hi(.LANCHOR0)
+ 113 0012 13040400 		addi	s0,s0,%lo(.LANCHOR0)
+  46:main.c        **** 
+ 114              		.loc 1 46 22
+ 115 0016 8545     		li	a1,1
+ 116 0018 B395A500 		sll	a1,a1,a0
+ 117              		.loc 1 49 5
+ 118 001c 0840     		lw	a0,0(s0)
+ 119 001e FD15     		addi	a1,a1,-1
+ 120 0020 97000000 		call	l88mem
+ 120      E7800000 
+ 121              	.LVL10:
+  50:main.c        ****     l88row(activeCol);
+ 122              		.loc 1 50 5 is_stmt 1
+ 123 0028 0840     		lw	a0,0(s0)
+  51:main.c        **** }
+ 124              		.loc 1 51 1 is_stmt 0
+ 125 002a 2244     		lw	s0,8(sp)
+ 126              		.cfi_remember_state
+ 127              		.cfi_restore 8
+ 128 002c B240     		lw	ra,12(sp)
+ 129              		.cfi_restore 1
+ 130 002e 4101     		addi	sp,sp,16
+ 131              	.LCFI3:
+ 132              		.cfi_def_cfa_offset 0
+  50:main.c        ****     l88row(activeCol);
+ 133              		.loc 1 50 5
+ 134 0030 17030000 		tail	l88row
+ 134      67000300 
+ 135              	.LVL11:
+ 136              	.L6:
+ 137              	.LCFI4:
+ 138              		.cfi_restore_state
+  46:main.c        **** 
+ 139              		.loc 1 46 5 is_stmt 1
+  49:main.c        ****     l88row(activeCol);
+ 140              		.loc 1 49 5
+  46:main.c        **** 
+ 141              		.loc 1 46 22 is_stmt 0
+ 142 0038 E35B05FC 		bge	a0,zero,.L7
+ 143 003c 0145     		li	a0,0
+ 144              	.LVL12:
+ 145 003e C1BF     		j	.L7
+ 146              		.cfi_endproc
+ 147              	.LFE3:
+ 149              		.section	.text.startup.main,"ax",@progbits
+ 150              		.align	1
+ 151              		.globl	main
+ 153              	main:
+ 154              	.LFB4:
   52:main.c        **** 
-  53:main.c        ****             case 1:
-  54:main.c        ****                 execStep(CCW);
-  55:main.c        ****                 break;
-  56:main.c        **** 
-  57:main.c        ****             case 2:
-  58:main.c        ****                 execStep(CW);
-  59:main.c        ****                 break;
-  60:main.c        **** 
-  61:main.c        ****             case 3:
-  62:main.c        ****                 // sleep
-  63:main.c        ****                 break;
-  64:main.c        ****         }
-  65:main.c        **** 
-  66:main.c        ****         for (volatile int i = 0; i < 100000; i++) {}
-  76              		.loc 1 66 9
-  77 0064 E164     		li	s1,98304
-  78 0066 13090900 		addi	s2,s2,%lo(.LANCHOR0)
-  79              	.LBE2:
-  39:main.c        ****                 gpio_bit_reset(GPIOB, GPIO_PIN_0);
-  80              		.loc 1 39 17
-  81 006a 130404C0 		addi	s0,s0,-1024
-  48:main.c        ****             case 0:
-  82              		.loc 1 48 9
-  83 006e 370A0000 		lui	s4,%hi(.LANCHOR1)
-  84 0072 894A     		li	s5,2
-  85              	.LBB3:
-  86              		.loc 1 66 9
-  87 0074 9384F469 		addi	s1,s1,1695
-  88              	.L10:
-  89              	.LBE3:
-  34:main.c        **** 
-  90              		.loc 1 34 5 is_stmt 1
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 4
-
-
-  37:main.c        **** 
-  91              		.loc 1 37 9
-  37:main.c        **** 
-  92              		.loc 1 37 25 is_stmt 0
-  93 0078 83270900 		lw	a5,0(s2)
-  37:main.c        **** 
-  94              		.loc 1 37 12
-  95 007c 63813703 		beq	a5,s3,.L2
-  39:main.c        ****                 gpio_bit_reset(GPIOB, GPIO_PIN_0);
-  96              		.loc 1 39 13 is_stmt 1
-  39:main.c        ****                 gpio_bit_reset(GPIOB, GPIO_PIN_0);
-  97              		.loc 1 39 17 is_stmt 0
-  98 0080 8545     		li	a1,1
-  99 0082 2285     		mv	a0,s0
- 100 0084 97000000 		call	gpio_output_bit_get
- 100      E7800000 
- 101              	.LVL7:
-  40:main.c        ****             } else {
- 102              		.loc 1 40 17
- 103 008c 8545     		li	a1,1
-  39:main.c        ****                 gpio_bit_reset(GPIOB, GPIO_PIN_0);
- 104              		.loc 1 39 16
- 105 008e 15CD     		beq	a0,zero,.L3
-  40:main.c        ****             } else {
- 106              		.loc 1 40 17 is_stmt 1
- 107 0090 2285     		mv	a0,s0
- 108 0092 97000000 		call	gpio_bit_reset
- 108      E7800000 
- 109              	.LVL8:
- 110              	.L4:
-  45:main.c        ****         }
- 111              		.loc 1 45 13
-  45:main.c        ****         }
- 112              		.loc 1 45 26 is_stmt 0
- 113 009a 83290900 		lw	s3,0(s2)
- 114              	.LVL9:
- 115              	.L2:
-  48:main.c        ****             case 0:
- 116              		.loc 1 48 9 is_stmt 1
- 117 009e 93070A00 		addi	a5,s4,%lo(.LANCHOR1)
- 118 00a2 9C43     		lw	a5,0(a5)
- 119 00a4 0547     		li	a4,1
- 120 00a6 6388E702 		beq	a5,a4,.L5
- 121 00aa 63835701 		beq	a5,s5,.L6
- 122 00ae 91E7     		bne	a5,zero,.L7
- 123              	.L6:
-  50:main.c        ****                 break;
- 124              		.loc 1 50 17
- 125 00b0 0545     		li	a0,1
- 126              	.L12:
-  54:main.c        ****                 break;
- 127              		.loc 1 54 17 is_stmt 0
- 128 00b2 97000000 		call	execStep
- 128      E7800000 
- 129              	.LVL10:
+  53:main.c        **** 
+  54:main.c        **** int main(void) {
+ 155              		.loc 1 54 16 is_stmt 1
+ 156              		.cfi_startproc
   55:main.c        **** 
- 130              		.loc 1 55 17 is_stmt 1
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 5
+  56:main.c        ****     // Initialize hardware
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 5
 
 
- 131              	.L7:
- 132              		.loc 1 66 9
- 133              	.LBB4:
- 134              		.loc 1 66 14
- 135              		.loc 1 66 27 is_stmt 0
- 136 00ba 02C6     		sw	zero,12(sp)
- 137              	.L8:
- 138              		.loc 1 66 36 discriminator 1
- 139 00bc B247     		lw	a5,12(sp)
- 140              		.loc 1 66 9 discriminator 1
- 141 00be E3CDF4FA 		bgt	a5,s1,.L10
- 142              		.loc 1 66 52 is_stmt 1 discriminator 3
- 143              		.loc 1 66 47 is_stmt 0 discriminator 3
- 144 00c2 B247     		lw	a5,12(sp)
- 145 00c4 8507     		addi	a5,a5,1
- 146 00c6 3EC6     		sw	a5,12(sp)
- 147 00c8 D5BF     		j	.L8
- 148              	.L3:
- 149              	.LBE4:
-  42:main.c        ****             }
- 150              		.loc 1 42 17 is_stmt 1
- 151 00ca 2285     		mv	a0,s0
- 152 00cc 97000000 		call	gpio_bit_set
- 152      E7800000 
- 153              	.LVL11:
- 154 00d4 D9B7     		j	.L4
- 155              	.L5:
-  54:main.c        ****                 break;
- 156              		.loc 1 54 17
- 157 00d6 0145     		li	a0,0
- 158 00d8 E9BF     		j	.L12
- 159              		.cfi_endproc
- 160              	.LFE2:
- 162              		.globl	phase
- 163              		.globl	currentTemp
- 164              		.globl	middle
- 165              		.globl	min_temp
- 166              		.globl	max_temp
- 167              		.section	.sbss.min_temp,"aw",@nobits
- 168              		.align	2
- 171              	min_temp:
- 172 0000 00000000 		.zero	4
- 173              		.section	.sbss.phase,"aw",@nobits
- 174              		.align	2
- 175              		.set	.LANCHOR1,. + 0
- 178              	phase:
- 179 0000 00000000 		.zero	4
- 180              		.section	.sdata.currentTemp,"aw"
- 181              		.align	2
- 182              		.set	.LANCHOR0,. + 0
- 185              	currentTemp:
- 186 0000 04000000 		.word	4
- 187              		.section	.sdata.max_temp,"aw"
- 188              		.align	2
- 191              	max_temp:
- 192 0000 07000000 		.word	7
- 193              		.section	.sdata.middle,"aw"
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 6
+  57:main.c        ****     initStep();
+ 157              		.loc 1 57 5
+  54:main.c        **** 
+ 158              		.loc 1 54 16 is_stmt 0
+ 159 0000 7971     		addi	sp,sp,-48
+ 160              	.LCFI5:
+ 161              		.cfi_def_cfa_offset 48
+ 162 0002 06D6     		sw	ra,44(sp)
+ 163 0004 22D4     		sw	s0,40(sp)
+ 164 0006 26D2     		sw	s1,36(sp)
+ 165 0008 4ECE     		sw	s3,28(sp)
+ 166 000a 52CC     		sw	s4,24(sp)
+ 167 000c 56CA     		sw	s5,20(sp)
+ 168 000e 5AC8     		sw	s6,16(sp)
+ 169              		.cfi_offset 1, -4
+ 170              		.cfi_offset 8, -8
+ 171              		.cfi_offset 9, -12
+ 172              		.cfi_offset 19, -20
+ 173              		.cfi_offset 20, -24
+ 174              		.cfi_offset 21, -28
+ 175              		.cfi_offset 22, -32
+  58:main.c        ****     initDisplay();
+  59:main.c        ****     initSensorInterrupt();
+  60:main.c        **** 
+  61:main.c        ****     // Enable interrupts
+  62:main.c        ****     eclic_global_interrupt_enable();
+  63:main.c        **** 
+  64:main.c        ****     // Display initial temperature
+  65:main.c        ****     int previousTemp = currentTemp;
+ 176              		.loc 1 65 9
+ 177 0010 B7090000 		lui	s3,%hi(.LANCHOR1)
+  54:main.c        **** 
+ 178              		.loc 1 54 16
+ 179 0014 4AD0     		sw	s2,32(sp)
+ 180              		.cfi_offset 18, -16
+  57:main.c        ****     initDisplay();
+ 181              		.loc 1 57 5
+ 182 0016 97000000 		call	initStep
+ 182      E7800000 
+ 183              	.LVL13:
+  58:main.c        ****     initDisplay();
+ 184              		.loc 1 58 5 is_stmt 1
+ 185 001e 97000000 		call	initDisplay
+ 185      E7800000 
+ 186              	.LVL14:
+  59:main.c        **** 
+ 187              		.loc 1 59 5
+ 188 0026 97000000 		call	initSensorInterrupt
+ 188      E7800000 
+ 189              	.LVL15:
+  62:main.c        **** 
+ 190              		.loc 1 62 5
+ 191 002e 97000000 		call	eclic_global_interrupt_enable
+ 191      E7800000 
+ 192              	.LVL16:
+ 193              		.loc 1 65 5
+ 194              		.loc 1 65 9 is_stmt 0
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 6
 
 
- 194              		.align	2
- 197              	middle:
- 198 0000 03000000 		.word	3
- 199              		.text
- 200              	.Letext0:
- 201              		.file 2 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
- 202              		.file 3 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
- 203              		.file 4 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
- 204              		.file 5 "sensor.h"
- 205              		.file 6 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_rcu.h"
- 206              		.file 7 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_gpio.h"
- 207              		.file 8 "stepper.h"
- 208              		.file 9 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_eclic.h"
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 7
+ 195 0036 93870900 		addi	a5,s3,%lo(.LANCHOR1)
+ 196 003a 8043     		lw	s0,0(a5)
+ 197              	.LVL17:
+  66:main.c        ****     displayTemp(previousTemp);
+ 198              		.loc 1 66 5 is_stmt 1
+ 199              	.LBB4:
+ 200              	.LBB5:
+  67:main.c        **** 
+  68:main.c        ****     while (1) {
+  69:main.c        **** 
+  70:main.c        ****         // Update LEDs only when temperature changes
+  71:main.c        ****         int temp = currentTemp;
+  72:main.c        **** 
+  73:main.c        ****         if (temp != previousTemp) {
+  74:main.c        ****             displayTemp(temp);
+  75:main.c        ****             previousTemp = temp;
+  76:main.c        ****         }
+  77:main.c        **** 
+  78:main.c        ****         // Motor control
+  79:main.c        ****         switch (phase) {
+  80:main.c        **** 
+  81:main.c        ****             case 0:
+  82:main.c        ****                 execStep(CW);
+  83:main.c        ****                 break;
+  84:main.c        **** 
+  85:main.c        ****             case 1:
+  86:main.c        ****                 execStep(CCW);
+  87:main.c        ****                 break;
+  88:main.c        **** 
+  89:main.c        ****             case 2:
+  90:main.c        ****                 execStep(CW);
+  91:main.c        ****                 break;
+  92:main.c        **** 
+  93:main.c        ****             case 3:
+  94:main.c        ****                 // Stop motor
+  95:main.c        ****                 break;
+  96:main.c        **** 
+  97:main.c        ****             default:
+  98:main.c        ****                 break;
+  99:main.c        ****         }
+ 100:main.c        **** 		for (volatile int i = 0; i < 50000; i++)
+ 201              		.loc 1 100 3 is_stmt 0
+ 202 003c B164     		li	s1,49152
+ 203 003e 93890900 		addi	s3,s3,%lo(.LANCHOR1)
+ 204              	.LBE5:
+ 205              	.LBE4:
+  66:main.c        ****     displayTemp(previousTemp);
+ 206              		.loc 1 66 5
+ 207 0042 2285     		mv	a0,s0
+ 208 0044 97000000 		call	displayTemp
+ 208      E7800000 
+ 209              	.LVL18:
+ 210              	.LBB9:
+  79:main.c        **** 
+ 211              		.loc 1 79 9
+ 212 004c 370A0000 		lui	s4,%hi(.LANCHOR2)
+ 213 0050 854A     		li	s5,1
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 7
+
+
+ 214 0052 094B     		li	s6,2
+ 215              	.LBB6:
+ 216              		.loc 1 100 3
+ 217 0054 9384F434 		addi	s1,s1,847
+ 218              	.L16:
+ 219              	.LBE6:
+ 220              	.LBE9:
+  68:main.c        **** 
+ 221              		.loc 1 68 5 is_stmt 1
+ 222              	.LBB10:
+  71:main.c        **** 
+ 223              		.loc 1 71 9
+  71:main.c        **** 
+ 224              		.loc 1 71 13 is_stmt 0
+ 225 0058 03A90900 		lw	s2,0(s3)
+ 226              	.LVL19:
+  73:main.c        ****             displayTemp(temp);
+ 227              		.loc 1 73 9 is_stmt 1
+  73:main.c        ****             displayTemp(temp);
+ 228              		.loc 1 73 12 is_stmt 0
+ 229 005c 63072401 		beq	s0,s2,.L10
+  74:main.c        ****             previousTemp = temp;
+ 230              		.loc 1 74 13 is_stmt 1
+ 231 0060 4A85     		mv	a0,s2
+ 232 0062 97000000 		call	displayTemp
+ 232      E7800000 
+ 233              	.LVL20:
+  75:main.c        ****         }
+ 234              		.loc 1 75 13
+ 235              	.L10:
+  79:main.c        **** 
+ 236              		.loc 1 79 9
+ 237 006a 93070A00 		addi	a5,s4,%lo(.LANCHOR2)
+ 238 006e 9C43     		lw	a5,0(a5)
+ 239 0070 63835703 		beq	a5,s5,.L11
+ 240 0074 63836701 		beq	a5,s6,.L12
+ 241 0078 91E7     		bne	a5,zero,.L13
+ 242              	.L12:
+  82:main.c        ****                 break;
+ 243              		.loc 1 82 17
+ 244 007a 0545     		li	a0,1
+ 245              	.L18:
+  86:main.c        ****                 break;
+ 246              		.loc 1 86 17 is_stmt 0
+ 247 007c 97000000 		call	execStep
+ 247      E7800000 
+ 248              	.LVL21:
+  87:main.c        **** 
+ 249              		.loc 1 87 17 is_stmt 1
+ 250              	.L13:
+ 251              		.loc 1 100 3
+ 252              	.LBB7:
+ 253              		.loc 1 100 8
+ 254              		.loc 1 100 21 is_stmt 0
+ 255 0084 02C6     		sw	zero,12(sp)
+ 256              	.LBE7:
+  71:main.c        **** 
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 8
+
+
+ 257              		.loc 1 71 13
+ 258 0086 4A84     		mv	s0,s2
+ 259              	.LVL22:
+ 260              	.L14:
+ 261              	.LBB8:
+ 262              		.loc 1 100 30 discriminator 1
+ 263 0088 B247     		lw	a5,12(sp)
+ 264              		.loc 1 100 3 discriminator 1
+ 265 008a E3C7F4FC 		bgt	a5,s1,.L16
+ 101:main.c        **** 		{
+ 102:main.c        **** 			/* code */
+ 103:main.c        **** 		}
+ 266              		.loc 1 103 3 is_stmt 1 discriminator 3
+ 100:main.c        **** 		{
+ 267              		.loc 1 100 40 is_stmt 0 discriminator 3
+ 268 008e B247     		lw	a5,12(sp)
+ 269 0090 8507     		addi	a5,a5,1
+ 270 0092 3EC6     		sw	a5,12(sp)
+ 271 0094 D5BF     		j	.L14
+ 272              	.LVL23:
+ 273              	.L11:
+ 274              	.LBE8:
+  86:main.c        ****                 break;
+ 275              		.loc 1 86 17 is_stmt 1
+ 276 0096 0145     		li	a0,0
+ 277 0098 D5B7     		j	.L18
+ 278              	.LBE10:
+ 279              		.cfi_endproc
+ 280              	.LFE4:
+ 282              		.globl	phase
+ 283              		.globl	currentTemp
+ 284              		.globl	middle
+ 285              		.globl	min_temp
+ 286              		.globl	max_temp
+ 287              		.section	.sbss.min_temp,"aw",@nobits
+ 288              		.align	2
+ 291              	min_temp:
+ 292 0000 00000000 		.zero	4
+ 293              		.section	.sbss.phase,"aw",@nobits
+ 294              		.align	2
+ 295              		.set	.LANCHOR2,. + 0
+ 298              	phase:
+ 299 0000 00000000 		.zero	4
+ 300              		.section	.sdata.activeCol,"aw"
+ 301              		.align	2
+ 302              		.set	.LANCHOR0,. + 0
+ 305              	activeCol:
+ 306 0000 03000000 		.word	3
+ 307              		.section	.sdata.currentTemp,"aw"
+ 308              		.align	2
+ 309              		.set	.LANCHOR1,. + 0
+ 312              	currentTemp:
+ 313 0000 01000000 		.word	1
+ 314              		.section	.sdata.max_temp,"aw"
+ 315              		.align	2
+ 318              	max_temp:
+ 319 0000 04000000 		.word	4
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 9
+
+
+ 320              		.section	.sdata.middle,"aw"
+ 321              		.align	2
+ 324              	middle:
+ 325 0000 02000000 		.word	2
+ 326              		.text
+ 327              	.Letext0:
+ 328              		.file 2 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
+ 329              		.file 3 "c:\\users\\yusefg\\desktop\\toolchain-gd32v-v202-win\\compiler\\riscv64-unknown-elf\\incl
+ 330              		.file 4 "./../../firmware/GD32VF103_standard_peripheral/system_gd32vf103.h"
+ 331              		.file 5 "sensor.h"
+ 332              		.file 6 "stepper.h"
+ 333              		.file 7 "./../../firmware/GD32VF103_standard_peripheral/Include/gd32vf103_eclic.h"
+ 334              		.file 8 "drivers.h"
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:13     .text.startup.main:0000000000000000 main
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:17     .text.startup.main:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:18     .text.startup.main:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:19     .text.startup.main:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:20     .text.startup.main:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:22     .text.startup.main:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:24     .text.startup.main:0000000000000002 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:26     .text.startup.main:0000000000000006 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:29     .text.startup.main:000000000000000c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:30     .text.startup.main:000000000000000c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:31     .text.startup.main:000000000000000c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:33     .text.startup.main:000000000000000c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:35     .text.startup.main:0000000000000010 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:39     .text.startup.main:0000000000000018 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:40     .text.startup.main:0000000000000018 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:41     .text.startup.main:0000000000000018 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:42     .text.startup.main:0000000000000018 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:44     .text.startup.main:0000000000000018 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:47     .text.startup.main:0000000000000020 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:54     .text.startup.main:0000000000000032 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:59     .text.startup.main:0000000000000040 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:60     .text.startup.main:0000000000000040 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:62     .text.startup.main:0000000000000044 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:65     .text.startup.main:000000000000004c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:68     .text.startup.main:0000000000000054 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:71     .text.startup.main:000000000000005c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:72     .text.startup.main:000000000000005c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:77     .text.startup.main:0000000000000064 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:81     .text.startup.main:000000000000006a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:83     .text.startup.main:000000000000006e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:87     .text.startup.main:0000000000000074 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:91     .text.startup.main:0000000000000078 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:92     .text.startup.main:0000000000000078 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:93     .text.startup.main:0000000000000078 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:95     .text.startup.main:000000000000007c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:97     .text.startup.main:0000000000000080 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:98     .text.startup.main:0000000000000080 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:103    .text.startup.main:000000000000008c .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:105    .text.startup.main:000000000000008e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:107    .text.startup.main:0000000000000090 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:112    .text.startup.main:000000000000009a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:113    .text.startup.main:000000000000009a .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:117    .text.startup.main:000000000000009e .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:125    .text.startup.main:00000000000000b0 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:128    .text.startup.main:00000000000000b2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:132    .text.startup.main:00000000000000ba .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:134    .text.startup.main:00000000000000ba .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:135    .text.startup.main:00000000000000ba .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:136    .text.startup.main:00000000000000ba .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:139    .text.startup.main:00000000000000bc .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:141    .text.startup.main:00000000000000be .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:143    .text.startup.main:00000000000000c2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:144    .text.startup.main:00000000000000c2 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:151    .text.startup.main:00000000000000ca .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:157    .text.startup.main:00000000000000d6 .L0 
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 8
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:13     .text.initDisplay:0000000000000000 initDisplay
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:17     .text.initDisplay:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:18     .text.initDisplay:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:19     .text.initDisplay:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:20     .text.initDisplay:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:22     .text.initDisplay:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:27     .text.initDisplay:000000000000000a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:28     .text.initDisplay:000000000000000a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:29     .text.initDisplay:000000000000000a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:30     .text.initDisplay:000000000000000a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:32     .text.initDisplay:000000000000000a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:34     .text.initDisplay:000000000000000c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:38     .text.initDisplay:0000000000000014 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:39     .text.initDisplay:0000000000000014 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:42     .text.initDisplay:0000000000000018 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:46     .text.initDisplay:0000000000000020 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:48     .text.initDisplay:0000000000000020 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:49     .text.initDisplay:0000000000000020 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:50     .text.initDisplay:0000000000000020 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:53     .text.initDisplay:0000000000000028 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:59     .text.initDisplay:0000000000000030 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:62     .text.initDisplay:0000000000000032 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:66     .text.initDisplay:000000000000003c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:67     .text.initDisplay:000000000000003c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:68     .text.initDisplay:000000000000003e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:71     .text.initDisplay:000000000000003e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:73     .text.initDisplay:0000000000000040 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:74     .text.initDisplay:0000000000000042 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:76     .text.initDisplay:0000000000000044 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:78     .text.initDisplay:0000000000000046 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:81     .text.initDisplay:0000000000000048 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:83     .text.initDisplay:0000000000000048 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:85     .text.initDisplay:0000000000000050 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:92     .text.displayTemp:0000000000000000 displayTemp
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:95     .text.displayTemp:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:97     .text.displayTemp:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:98     .text.displayTemp:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:99     .text.displayTemp:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:101    .text.displayTemp:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:104    .text.displayTemp:0000000000000006 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:105    .text.displayTemp:0000000000000006 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:112    .text.displayTemp:000000000000000e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:115    .text.displayTemp:0000000000000016 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:118    .text.displayTemp:000000000000001c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:123    .text.displayTemp:0000000000000028 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:125    .text.displayTemp:000000000000002a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:126    .text.displayTemp:000000000000002c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:127    .text.displayTemp:000000000000002c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:129    .text.displayTemp:000000000000002e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:132    .text.displayTemp:0000000000000030 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:134    .text.displayTemp:0000000000000030 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:138    .text.displayTemp:0000000000000038 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:140    .text.displayTemp:0000000000000038 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:141    .text.displayTemp:0000000000000038 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:142    .text.displayTemp:0000000000000038 .L0 
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 11
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:159    .text.startup.main:00000000000000da .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:178    .sbss.phase:0000000000000000 phase
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:185    .sdata.currentTemp:0000000000000000 currentTemp
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:197    .sdata.middle:0000000000000000 middle
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:171    .sbss.min_temp:0000000000000000 min_temp
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:191    .sdata.max_temp:0000000000000000 max_temp
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:175    .sbss.phase:0000000000000000 .LANCHOR1
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:182    .sdata.currentTemp:0000000000000000 .LANCHOR0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:167    .text.startup.main:00000000000000da .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:146    .text.displayTemp:0000000000000040 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:153    .text.startup.main:0000000000000000 main
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:156    .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:157    .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:158    .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:159    .text.startup.main:0000000000000000 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:161    .text.startup.main:0000000000000002 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:169    .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:170    .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:171    .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:172    .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:173    .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:174    .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:175    .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:177    .text.startup.main:0000000000000010 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:179    .text.startup.main:0000000000000014 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:180    .text.startup.main:0000000000000016 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:182    .text.startup.main:0000000000000016 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:185    .text.startup.main:000000000000001e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:188    .text.startup.main:0000000000000026 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:191    .text.startup.main:000000000000002e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:194    .text.startup.main:0000000000000036 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:195    .text.startup.main:0000000000000036 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:201    .text.startup.main:000000000000003c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:202    .text.startup.main:000000000000003c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:207    .text.startup.main:0000000000000042 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:212    .text.startup.main:000000000000004c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:217    .text.startup.main:0000000000000054 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:223    .text.startup.main:0000000000000058 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:224    .text.startup.main:0000000000000058 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:225    .text.startup.main:0000000000000058 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:228    .text.startup.main:000000000000005c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:229    .text.startup.main:000000000000005c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:231    .text.startup.main:0000000000000060 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:236    .text.startup.main:000000000000006a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:237    .text.startup.main:000000000000006a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:244    .text.startup.main:000000000000007a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:247    .text.startup.main:000000000000007c .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:251    .text.startup.main:0000000000000084 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:253    .text.startup.main:0000000000000084 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:254    .text.startup.main:0000000000000084 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:255    .text.startup.main:0000000000000084 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:258    .text.startup.main:0000000000000086 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:263    .text.startup.main:0000000000000088 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:265    .text.startup.main:000000000000008a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:267    .text.startup.main:000000000000008e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:268    .text.startup.main:000000000000008e .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:276    .text.startup.main:0000000000000096 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:279    .text.startup.main:000000000000009a .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:298    .sbss.phase:0000000000000000 phase
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:312    .sdata.currentTemp:0000000000000000 currentTemp
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:324    .sdata.middle:0000000000000000 middle
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:291    .sbss.min_temp:0000000000000000 min_temp
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:318    .sdata.max_temp:0000000000000000 max_temp
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:295    .sbss.phase:0000000000000000 .LANCHOR2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:302    .sdata.activeCol:0000000000000000 .LANCHOR0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:305    .sdata.activeCol:0000000000000000 activeCol
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 12
+
+
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:309    .sdata.currentTemp:0000000000000000 .LANCHOR1
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:88     .text.initDisplay:0000000000000050 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:149    .text.displayTemp:0000000000000040 .L0 
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:287    .text.startup.main:000000000000009a .L0 
                      .debug_frame:0000000000000000 .L0 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:115    .text.startup.main:000000000000009e .L2
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:148    .text.startup.main:00000000000000ca .L3
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:155    .text.startup.main:00000000000000d6 .L5
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:123    .text.startup.main:00000000000000b0 .L6
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:131    .text.startup.main:00000000000000ba .L7
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:88     .text.startup.main:0000000000000078 .L10
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:137    .text.startup.main:00000000000000bc .L8
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:110    .text.startup.main:000000000000009a .L4
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:126    .text.startup.main:00000000000000b2 .L12
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:711    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1122   .debug_str:0000000000000241 .LASF70
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1150   .debug_str:000000000000035a .LASF71
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1100   .debug_str:0000000000000171 .LASF72
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1018   .debug_ranges:0000000000000000 .Ldebug_ranges0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1032   .debug_line:0000000000000000 .Ldebug_line0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1120   .debug_str:0000000000000234 .LASF0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1114   .debug_str:0000000000000208 .LASF1
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1180   .debug_str:00000000000003ee .LASF6
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1104   .debug_str:00000000000001c7 .LASF2
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1058   .debug_str:0000000000000081 .LASF3
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1130   .debug_str:00000000000002ec .LASF4
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1172   .debug_str:00000000000003cd .LASF5
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1052   .debug_str:0000000000000061 .LASF7
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1124   .debug_str:00000000000002c9 .LASF8
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1050   .debug_str:0000000000000053 .LASF9
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1116   .debug_str:0000000000000214 .LASF10
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1066   .debug_str:00000000000000a6 .LASF11
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1118   .debug_str:000000000000022b .LASF12
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1036   .debug_str:0000000000000009 .LASF51
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1142   .debug_str:0000000000000339 .LASF13
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1144   .debug_str:0000000000000342 .LASF14
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1178   .debug_str:00000000000003e6 .LASF15
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1174   .debug_str:00000000000003d6 .LASF16
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1164   .debug_str:000000000000039f .LASF17
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1090   .debug_str:000000000000013a .LASF18
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1092   .debug_str:0000000000000145 .LASF19
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1094   .debug_str:0000000000000150 .LASF20
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1096   .debug_str:000000000000015b .LASF21
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1098   .debug_str:0000000000000166 .LASF22
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1086   .debug_str:0000000000000124 .LASF23
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1074   .debug_str:00000000000000d4 .LASF24
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1082   .debug_str:0000000000000112 .LASF25
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1084   .debug_str:000000000000011b .LASF26
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1160   .debug_str:0000000000000389 .LASF27
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1162   .debug_str:0000000000000394 .LASF28
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1166   .debug_str:00000000000003a9 .LASF29
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1168   .debug_str:00000000000003b3 .LASF30
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 9
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:47     .text.initDisplay:0000000000000020 .L2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:136    .text.displayTemp:0000000000000038 .L6
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:110    .text.displayTemp:000000000000000e .L7
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:235    .text.startup.main:000000000000006a .L10
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:273    .text.startup.main:0000000000000096 .L11
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:242    .text.startup.main:000000000000007a .L12
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:250    .text.startup.main:0000000000000084 .L13
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:218    .text.startup.main:0000000000000058 .L16
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:260    .text.startup.main:0000000000000088 .L14
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:245    .text.startup.main:000000000000007c .L18
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:747    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1390   .debug_str:00000000000001c0 .LASF38
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1378   .debug_str:0000000000000185 .LASF39
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1320   .debug_str:0000000000000000 .LASF40
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1284   .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1318   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1358   .debug_str:000000000000010e .LASF0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1400   .debug_str:000000000000026c .LASF1
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1324   .debug_str:0000000000000053 .LASF6
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1334   .debug_str:0000000000000087 .LASF2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1384   .debug_str:00000000000001a3 .LASF3
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1342   .debug_str:00000000000000b8 .LASF4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1332   .debug_str:000000000000007e .LASF5
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1352   .debug_str:00000000000000f7 .LASF7
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1338   .debug_str:00000000000000a1 .LASF8
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1376   .debug_str:0000000000000177 .LASF9
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1362   .debug_str:0000000000000128 .LASF10
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1364   .debug_str:000000000000013f .LASF11
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1392   .debug_str:0000000000000248 .LASF12
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1380   .debug_str:000000000000018c .LASF14
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1398   .debug_str:0000000000000260 .LASF13
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1368   .debug_str:0000000000000150 .LASF15
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1348   .debug_str:00000000000000e5 .LASF16
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1350   .debug_str:00000000000000ee .LASF17
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1366   .debug_str:0000000000000147 .LASF18
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1328   .debug_str:0000000000000069 .LASF19
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1396   .debug_str:0000000000000259 .LASF20
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1336   .debug_str:0000000000000095 .LASF21
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1344   .debug_str:00000000000000cb .LASF22
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1388   .debug_str:00000000000001b6 .LASF23
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1356   .debug_str:0000000000000109 .LASF41
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:154    .text.startup.main:0000000000000000 .LFB4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:280    .text.startup.main:000000000000009a .LFE4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1072   .debug_loc:0000000000000000 .LLST5
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1360   .debug_str:000000000000011b .LASF24
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1085   .debug_loc:0000000000000020 .LLST6
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1340   .debug_str:00000000000000b3 .LASF25
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1104   .debug_loc:0000000000000054 .LLST7
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:233    .text.startup.main:000000000000006a .LVL20
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:248    .text.startup.main:0000000000000084 .LVL21
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:183    .text.startup.main:000000000000001e .LVL13
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:186    .text.startup.main:0000000000000026 .LVL14
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 13
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1134   .debug_str:0000000000000304 .LASF31
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1136   .debug_str:000000000000030d .LASF32
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1070   .debug_str:00000000000000c2 .LASF33
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1072   .debug_str:00000000000000cb .LASF34
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1112   .debug_str:00000000000001ff .LASF35
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1128   .debug_str:00000000000002e4 .LASF36
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1146   .debug_str:000000000000034b .LASF37
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1056   .debug_str:0000000000000079 .LASF38
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1148   .debug_str:0000000000000353 .LASF39
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1038   .debug_str:0000000000000019 .LASF40
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1152   .debug_str:0000000000000361 .LASF41
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1042   .debug_str:000000000000002f .LASF42
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1044   .debug_str:0000000000000039 .LASF43
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1046   .debug_str:0000000000000043 .LASF44
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1108   .debug_str:00000000000001ed .LASF45
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1110   .debug_str:00000000000001f6 .LASF46
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1088   .debug_str:000000000000012f .LASF47
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1080   .debug_str:0000000000000109 .LASF48
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1158   .debug_str:000000000000037e .LASF49
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1102   .debug_str:00000000000001bb .LASF50
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1170   .debug_str:00000000000003bd .LASF52
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1062   .debug_str:0000000000000094 .LASF53
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1064   .debug_str:000000000000009d .LASF54
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1060   .debug_str:000000000000008b .LASF55
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1126   .debug_str:00000000000002db .LASF56
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1176   .debug_str:00000000000003df .LASF57
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1040   .debug_str:0000000000000023 .LASF58
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1048   .debug_str:000000000000004d .LASF59
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1132   .debug_str:00000000000002ff .LASF73
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:14     .text.startup.main:0000000000000000 .LFB2
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:160    .text.startup.main:00000000000000da .LFE2
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:992    .debug_loc:0000000000000000 .LLST0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1078   .debug_str:00000000000000fc .LASF60
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:45     .text.startup.main:0000000000000020 .LVL0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:52     .text.startup.main:0000000000000032 .LVL1
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:57     .text.startup.main:0000000000000040 .LVL2
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:63     .text.startup.main:000000000000004c .LVL3
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:66     .text.startup.main:0000000000000054 .LVL4
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:69     .text.startup.main:000000000000005c .LVL5
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:101    .text.startup.main:000000000000008c .LVL7
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:109    .text.startup.main:000000000000009a .LVL8
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:129    .text.startup.main:00000000000000ba .LVL10
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:153    .text.startup.main:00000000000000d4 .LVL11
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1106   .debug_str:00000000000001d5 .LASF61
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1156   .debug_str:0000000000000374 .LASF62
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1138   .debug_str:0000000000000316 .LASF63
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1154   .debug_str:000000000000036b .LASF64
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1068   .debug_str:00000000000000ae .LASF65
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1076   .debug_str:00000000000000de .LASF66
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1140   .debug_str:0000000000000325 .LASF67
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1034   .debug_str:0000000000000000 .LASF68
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:1054   .debug_str:000000000000006c .LASF69
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:21     .text.startup.main:0000000000000002 .LCFI0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:210    .debug_info:0000000000000000 .Ldebug_info0
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:75     .text.startup.main:0000000000000064 .LBB2
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:79     .text.startup.main:000000000000006a .LBE2
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:85     .text.startup.main:0000000000000074 .LBB3
-GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s 			page 10
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:189    .text.startup.main:000000000000002e .LVL15
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:192    .text.startup.main:0000000000000036 .LVL16
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:209    .text.startup.main:000000000000004c .LVL18
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1330   .debug_str:0000000000000072 .LASF27
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:93     .text.displayTemp:0000000000000000 .LFB3
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:147    .text.displayTemp:0000000000000040 .LFE3
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1119   .debug_loc:000000000000007d .LLST2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1142   .debug_loc:00000000000000b5 .LLST3
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1374   .debug_str:000000000000016f .LASF26
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1180   .debug_loc:00000000000000f7 .LLST4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:121    .text.displayTemp:0000000000000028 .LVL10
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:135    .text.displayTemp:0000000000000038 .LVL11
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1326   .debug_str:000000000000005d .LASF28
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:14     .text.initDisplay:0000000000000000 .LFB2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:86     .text.initDisplay:0000000000000050 .LFE2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1222   .debug_loc:0000000000000136 .LLST0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1240   .debug_loc:0000000000000162 .LLST1
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:51     .text.initDisplay:0000000000000028 .LVL2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:35     .text.initDisplay:0000000000000014 .LVL0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:43     .text.initDisplay:0000000000000020 .LVL1
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:64     .text.initDisplay:000000000000003c .LVL5
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:84     .text.initDisplay:0000000000000050 .LVL7
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1322   .debug_str:000000000000004a .LASF29
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1386   .debug_str:00000000000001ad .LASF30
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1346   .debug_str:00000000000000d1 .LASF31
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1402   .debug_str:0000000000000278 .LASF32
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1372   .debug_str:0000000000000168 .LASF33
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1382   .debug_str:000000000000019c .LASF34
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1354   .debug_str:0000000000000102 .LASF35
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1370   .debug_str:0000000000000160 .LASF36
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:1394   .debug_str:0000000000000251 .LASF37
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:160    .text.startup.main:0000000000000002 .LCFI5
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:197    .text.startup.main:000000000000003c .LVL17
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:259    .text.startup.main:0000000000000088 .LVL22
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:272    .text.startup.main:0000000000000096 .LVL23
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:226    .text.startup.main:000000000000005c .LVL19
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:100    .text.displayTemp:0000000000000002 .LCFI2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:131    .text.displayTemp:0000000000000030 .LCFI3
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:137    .text.displayTemp:0000000000000038 .LCFI4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:96     .text.displayTemp:0000000000000000 .LVL8
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:109    .text.displayTemp:000000000000000e .LVL9
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:144    .text.displayTemp:000000000000003e .LVL12
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:21     .text.initDisplay:0000000000000002 .LCFI0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:80     .text.initDisplay:0000000000000048 .LCFI1
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:55     .text.initDisplay:000000000000002e .LVL3
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:57     .text.initDisplay:0000000000000030 .LVL4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:69     .text.initDisplay:000000000000003e .LVL6
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:336    .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:37     .text.initDisplay:0000000000000014 .LBB2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:40     .text.initDisplay:0000000000000018 .LBE2
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:45     .text.initDisplay:0000000000000020 .LBB3
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:60     .text.initDisplay:0000000000000032 .LBE3
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:199    .text.startup.main:000000000000003c .LBB4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:205    .text.startup.main:0000000000000042 .LBE4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:210    .text.startup.main:000000000000004c .LBB9
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:220    .text.startup.main:0000000000000058 .LBE9
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:222    .text.startup.main:0000000000000058 .LBB10
+GAS LISTING C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s 			page 14
 
 
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:89     .text.startup.main:0000000000000078 .LBE3
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:133    .text.startup.main:00000000000000ba .LBB4
-C:\Users\YusefG\AppData\Local\Temp\ccKmNMdW.s:149    .text.startup.main:00000000000000ca .LBE4
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:278    .text.startup.main:000000000000009a .LBE10
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:200    .text.startup.main:000000000000003c .LBB5
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:204    .text.startup.main:0000000000000042 .LBE5
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:215    .text.startup.main:0000000000000054 .LBB6
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:219    .text.startup.main:0000000000000058 .LBE6
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:252    .text.startup.main:0000000000000084 .LBB7
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:256    .text.startup.main:0000000000000086 .LBE7
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:261    .text.startup.main:0000000000000088 .LBB8
+C:\Users\YusefG\AppData\Local\Temp\ccgP4Enn.s:274    .text.startup.main:0000000000000096 .LBE8
 
 UNDEFINED SYMBOLS
-rcu_periph_clock_enable
-gpio_init
-gpio_bit_reset
+colinit
+l88init
+colset
+l88mem
+l88row
 initStep
 initSensorInterrupt
 eclic_global_interrupt_enable
-gpio_output_bit_get
 execStep
-gpio_bit_set

@@ -9,6 +9,8 @@ extern volatile int middle;
 extern volatile int currentTemp; 
 extern volatile int phase; 
 
+int passed = 0;
+
 void initSensorInterrupt(void) {
 
     // Enable clocks
@@ -29,8 +31,8 @@ void initSensorInterrupt(void) {
                             GPIO_PIN_SOURCE_6);
 
     // Detect both rising and falling edges
-    exti_init(EXTI_5, EXTI_INTERRUPT, EXTI_TRIG_BOTH);
-    exti_init(EXTI_6, EXTI_INTERRUPT, EXTI_TRIG_BOTH);
+    exti_init(EXTI_5, EXTI_INTERRUPT, EXTI_TRIG_RISING);
+    exti_init(EXTI_6, EXTI_INTERRUPT, EXTI_TRIG_RISING);
 
     // Clear pending interrupts
     exti_interrupt_flag_clear(EXTI_5);
@@ -49,6 +51,9 @@ void EXTI5_9_IRQHandler(void) {
 
         sensorTriggered = 1;
 
+        
+        if(passed==1){
+        passed=0;
         switch (phase)
         {
         case 0:
@@ -64,7 +69,7 @@ void EXTI5_9_IRQHandler(void) {
         if (currentTemp==middle){phase++;}
             break;
         }
-
+    }
         exti_interrupt_flag_clear(EXTI_5);
     }
 
@@ -72,6 +77,7 @@ void EXTI5_9_IRQHandler(void) {
     if (exti_interrupt_flag_get(EXTI_6) != RESET) {
 
         sensorTriggered = 1;
+        passed=1;
 
         exti_interrupt_flag_clear(EXTI_6);
     }
